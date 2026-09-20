@@ -1,1 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>AI Dashboard</title>
+
+
+  <!-- ===================================================== -->
+  <!-- ======================= CSS ========================== -->
+  <!-- ===================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="css/home.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="css/desktop/workspace.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="css/desktop/ai-generator.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="css/desktop/ai-edit.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="css/desktop/virtual-mouse.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="css/desktop/manual-editor.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="css/mobile/mobile.css"
+  />
+
+
+  <!-- ===================================================== -->
+  <!-- =================== FONT AWESOME ==================== -->
+  <!-- ===================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
+
+  <!-- ===================================================== -->
+  <!-- ====================== FABRIC JS ===================== -->
+  <!-- ===================================================== -->
+
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js">
+  </script>
+
+
+  <!-- ===================================================== -->
+  <!-- ================= PROFILE PANEL CSS ================== -->
+  <!-- ===================================================== -->
+
+  <style>
+
+    /* ===================================================== */
+    /* ================= PROFILE OVERLAY =================== */
+    /* ===================================================== */
+
+    #profilePanel {
+
+      position: fixed;
+
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      background: rgba(0, 0, 0, 0.55);
+
+      backdrop-filter: blur(8px);
+
+      display: none;
+
+      align-items: center;
+      justify-content: center;
+
+      z-index: 99999;
+
+      padding: 20px;
+
+      box-sizing: border-box;
+
+    }
+
+
+    /* ===================================================== */
+    /* ================= PROFILE CARD ====================== */
+    /* ===================================================== */
+
+    .profile-panel-content {
+
+      position: relative;
+
+      width: min(550px, 95%);
+
+      max-height: 90vh;
+
+      overflow-y: auto;
+
+      background: #ffffff;
+
+      border-radius: 24px;
+
+      padding: 32px;
+
+      box-sizing: border-box;
+
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.30);
+
+      animation:
+        profilePanelIn 0.3s ease;
+
+    }
+
+
+    /* ===================================================== */
+    /* ================= ANIMATION ========================== */
+    /* ===================================================== */
+
+    @keyframes profilePanelIn {
+
+      from {
+
+        opacity: 0;
+
+        transform:
+          translateY(20px)
+          scale(0.96);
+
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform:
+          translateY(0)
+          scale(1);
+
+      }
+
+    }
+
+
+    /* ===================================================== */
+    /* ================= CLOSE BUTTON ======================= */
+    /* ===================================================== */
+
+    .profile-close {
+
+      position: absolute;
+
+      top: 18px;
+      right: 18px;
+
+      width: 40px;
+      height: 40px;
+
+      border: none;
+
+      border-radius: 50%;
+
+      background: #f1f1f1;
+
+      cursor: pointer;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size: 18px;
+
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+
+    }
+
+
+    .profile-close:hover {
+
+      transform: scale(1.08);
+
+      background: #e5e5e5;
+
+    }
+
+
+    /* ===================================================== */
+    /* ================= PROFILE HEADER ==================== */
+    /* ===================================================== */
+
+    .profile-header {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 18px;
+
+      padding-right: 45px;
+
+      margin-bottom: 28px;
+
+    }
+
+
+    /* ===================================================== */
+    /* ================= LARGE PROFILE ICON ================ */
+    /* ===================================================== */
+
+    .profile-large-icon {
+
+      width: 76px;
+      height: 76px;
+
+      min-width: 76px;
+
+      border-radius: 50%;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      background: #111111;
+
+      color: #ffffff;
+
+      font-size: 30px;
+
+    }
+
+
+    /* ===================================================== */
+    /* ================= PROFILE NAME ======================= */
+    /* ===================================================== */
+
+    #profileName {
+
+      margin: 0 0 5px 0;
+
+      font-size: 25px;
+
+      font-weight: 700;
+
+      color: #111111;
+
+    }
+
+
+    #profileEmail {
+
+      margin: 0;
+
+      color: #666666;
+
+      font-size: 14px;
+
+      word-break: break-word;
+
+    }
+
+
+    /* ===================================================== */
+    /* ================= PROFILE DETAILS =================== */
+    /* ===================================================== */
+
+    .profile-details {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: 14px;
+
+    }
+
+
+    /* ===================================================== */
+    /* ================= DETAIL BOX ========================= */
+    /* ===================================================== */
+
+    .profile-detail {
+
+      padding: 16px;
+
+      border-radius: 14px;
+
+      background: #f6f6f6;
+
+      border: 1px solid #eeeeee;
+
+      box-sizing: border-box;
+
+    }
+
+
+    .profile-detail span {
+
+      display: block;
+
+      font-size: 12px;
+
+      color: #777777;
+
+      margin-bottom: 6px;
+
+    }
+
+
+    .profile-detail strong {
+
+      display: block;
+
+      font-size: 15px;
+
+      color: #111111;
+
+      word-break: break-word;
+
+    }
+
+
+    /* ===================================================== */
+    /* ================= EMPTY VALUE ======================== */
+    /* ===================================================== */
+
+    .profile-detail strong.empty {
+
+      color: #999999;
+
+      font-style: italic;
+
+    }
+
+
+    /* ===================================================== */
+    /* ================= MOBILE ============================= */
+    /* ===================================================== */
+
+    @media (max-width: 600px) {
+
+      .profile-panel-content {
+
+        padding: 24px;
+
+        border-radius: 20px;
+
+      }
+
+
+      .profile-details {
+
+        grid-template-columns: 1fr;
+
+      }
+
+
+      .profile-large-icon {
+
+        width: 62px;
+        height: 62px;
+
+        min-width: 62px;
+
+        font-size: 24px;
+
+      }
+
+
+      #profileName {
+
+        font-size: 21px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- ===================================================== -->
+  <!-- ================= VIRTUAL CURSOR ==================== -->
+  <!-- ===================================================== -->
+
+  <div id="virtualCursor"></div>
+
+
+  <!-- ===================================================== -->
+  <!-- =============== LIVE AMBIENT BACKGROUND ============= -->
+  <!-- ===================================================== -->
+
+  <div class="ambient-bg">
+
+    <div class="light light1"></div>
+
+    <div class="light light2"></div>
+
+    <div class="light light3"></div>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- =================== TOP TOGGLE ====================== -->
+  <!-- ===================================================== -->
+
+  <div class="top-toggle">
+
+    <label class="switch">
+
+      <input type="checkbox">
+
+      <span class="slider"></span>
+
+    </label>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- =================== THEME BUTTON ==================== -->
+  <!-- ===================================================== -->
+
+  <div
+    class="theme-toggle"
+    id="themeToggle"
+  >
+
+    <i class="fa-solid fa-moon moon"></i>
+
+    <i class="fa-solid fa-sun sun"></i>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- ================= MAIN CONTAINER ==================== -->
+  <!-- ===================================================== -->
+
+  <div class="container">
+
+
+    <!-- =================================================== -->
+    <!-- ==================== SIDEBAR ====================== -->
+    <!-- =================================================== -->
+
+    <div class="sidebar">
+
+      <div class="sidebar-overlay"></div>
+
+
+      <!-- ================================================= -->
+      <!-- ================= PROFILE ICON ================== -->
+      <!-- ================================================= -->
+
+      <div
+        class="profile"
+        id="profileButton"
+        onclick="openProfile()"
+        title="Profile"
+      >
+
+        <div class="profile-icon">
+
+          <i class="fa-solid fa-user"></i>
+
+        </div>
+
+      </div>
+
+
+      <!-- ================================================= -->
+      <!-- ===================== MENU ======================= -->
+      <!-- ================================================= -->
+
+      <div class="menu">
+
+        <div
+          class="active-indicator"
+          id="activeIndicator">
+        </div>
+
+
+        <!-- ================= HOME ======================== -->
+
+        <div
+          class="menu-item"
+          onclick="goHome()"
+          id="homeIcon"
+        >
+
+          <i class="fa-solid fa-house"></i>
+
+        </div>
+
+
+        <!-- ================= WORKSPACE =================== -->
+
+        <div
+          class="menu-item workspace-icon"
+          id="workspaceIcon"
+        >
+
+          <i class="fa-solid fa-layer-group"></i>
+
+        </div>
+
+
+        <!-- ================= SAVED ======================= -->
+
+        <div class="menu-item">
+
+          <i class="fa-solid fa-bookmark"></i>
+
+        </div>
+
+      </div>
+
+
+      <!-- ================================================= -->
+      <!-- ================= BOTTOM ICONS ================== -->
+      <!-- ================================================= -->
+
+      <div class="bottom-icons">
+
+
+        <!-- ================= SETTINGS ==================== -->
+
+        <div class="settings">
+
+          <i class="fa-solid fa-gear"></i>
+
+        </div>
+
+
+        <!-- ================= LOGOUT ======================= -->
+
+        <div
+          class="logout"
+          onclick="logout()"
+        >
+
+          <i
+            class="fa-solid fa-right-from-bracket">
+          </i>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =================================================== -->
+    <!-- ================= MAIN CONTENT ==================== -->
+    <!-- =================================================== -->
+
+    <div
+      class="main mobile-main"
+      id="mainContent"
+    >
+
+
+      <!-- ================= MOBILE MENU ================== -->
+
+      <button class="mobile-menu-btn">
+
+        <i class="fa-solid fa-bars"></i>
+
+      </button>
+
+
+      <!-- ================= TITLE ========================= -->
+
+      <h1>LOOKOUT</h1>
+
+
+      <p class="subtitle">
+
+        What would you like to create today?
+
+      </p>
+
+
+      <!-- ================================================= -->
+      <!-- ====================== CARDS ==================== -->
+      <!-- ================================================= -->
+
+      <div class="cards mobile-cards">
+
+
+        <!-- ================= AI GENERATOR ================ -->
+
+        <div class="card">
+
+          <h2>AI Generator</h2>
+
+          <p>
+            Create stunning visuals and
+            generate images using AI.
+          </p>
+
+          <button
+            onclick="openGenerator()"
+          >
+
+            Get Started
+
+          </button>
+
+        </div>
+
+
+        <!-- ================= MANUAL EDIT ================= -->
+
+        <div class="card">
+
+          <h2>Manual Edit</h2>
+
+          <p>
+            Edit images manually using
+            advanced editing tools.
+          </p>
+
+          <button
+            onclick="openManualEdit()"
+          >
+
+            Start Editing
+
+          </button>
+
+        </div>
+
+
+        <!-- ================= AI EDIT ===================== -->
+
+        <div class="card">
+
+          <h2>AI Edit</h2>
+
+          <p>
+            Enhance and transform images
+            intelligently using AI.
+          </p>
+
+          <button
+            onclick="openAIEdit()"
+          >
+
+            Try AI Edit
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- ================= PROFILE PANEL ===================== -->
+  <!-- ===================================================== -->
+
+  <div
+    id="profilePanel"
+    class="profile-panel"
+  >
+
+
+    <div class="profile-panel-content">
+
+
+      <!-- ================= CLOSE ========================= -->
+
+      <button
+        class="profile-close"
+        onclick="closeProfile()"
+        aria-label="Close profile"
+      >
+
+        <i class="fa-solid fa-xmark"></i>
+
+      </button>
+
+
+      <!-- ================= PROFILE HEADER =============== -->
+
+      <div class="profile-header">
+
+
+        <div class="profile-large-icon">
+
+          <i class="fa-solid fa-user"></i>
+
+        </div>
+
+
+        <div>
+
+          <h2 id="profileName">
+            User Profile
+          </h2>
+
+          <p id="profileEmail">
+            -
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- ================================================= -->
+      <!-- ================= PROFILE DETAILS =============== -->
+      <!-- ================================================= -->
+
+      <div class="profile-details">
+
+
+        <div class="profile-detail">
+
+          <span>
+            First Name
+          </span>
+
+          <strong id="displayFirstName">
+            -
+          </strong>
+
+        </div>
+
+
+        <div class="profile-detail">
+
+          <span>
+            Last Name
+          </span>
+
+          <strong id="displayLastName">
+            -
+          </strong>
+
+        </div>
+
+
+        <div class="profile-detail">
+
+          <span>
+            Phone Number
+          </span>
+
+          <strong id="displayPhoneNumber">
+            -
+          </strong>
+
+        </div>
+
+
+        <div class="profile-detail">
+
+          <span>
+            Country
+          </span>
+
+          <strong id="displayCountry">
+            -
+          </strong>
+
+        </div>
+
+
+        <div class="profile-detail">
+
+          <span>
+            State
+          </span>
+
+          <strong id="displayState">
+            -
+          </strong>
+
+        </div>
+
+
+        <div class="profile-detail">
+
+          <span>
+            City
+          </span>
+
+          <strong id="displayCity">
+            -
+          </strong>
+
+        </div>
+
+
+        <div class="profile-detail">
+
+          <span>
+            Date of Birth
+          </span>
+
+          <strong id="displayDateOfBirth">
+            -
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================== -->
+  <!-- ===================== JAVASCRIPT =================== -->
+  <!-- ===================================================== -->
+
+
+  <!-- ================= LOOKOUT SERVICES ================= -->
+
+  <script src="js/services/api.js"></script>
+
+  <script src="js/services/storage.js"></script>
+
+  <script src="js/services/downloads.js"></script>
+
+
+  <!-- ================= LOOKOUT CORE ==================== -->
+
+  <script src="js/core/sidebar.js"></script>
+
+  <script src="js/core/theme.js"></script>
+
+  <script src="js/core/navigation.js"></script>
+
+  <script src="js/core/account.js"></script>
+
+
+  <!-- ================= LOOKOUT FEATURES ================= -->
+
+  <script src="js/features/ai-edit.js"></script>
+
+  <script src="js/features/ai-generator.js"></script>
+
+  <script src="js/features/manual-editor.js"></script>
+
+
+  <!-- ================= VIRTUAL MOUSE ==================== -->
+
+  <script
+    src="js/virtual-mouse/gesture-controller.js">
+  </script>
+
+  <script
+    type="module"
+    src="js/virtual-mouse/gesture-web.js">
+  </script>
+
+
+  <!-- ================= APP ============================== -->
+
+  <script src="js/core/app.js"></script>
+
+
+  <!-- ===================================================== -->
+  <!-- ============== PROFILE FUNCTIONALITY =============== -->
+  <!-- ===================================================== -->
+
+  <script>
+
+    /* ===================================================== */
+    /* ================= OPEN PROFILE ====================== */
+    /* ===================================================== */
+
+    function openProfile() {
+
+      const panel =
+        document.getElementById(
+          "profilePanel"
+        );
+
+
+      if (!panel) {
+
+        console.error(
+          "Profile panel not found."
+        );
+
+        return;
+
+      }
+
+
+      /* =============================================== */
+      /* READ SAVED PROFILE */
+      /* =============================================== */
+
+      let profile = {};
+
+      try {
+
+        const savedProfile =
+          localStorage.getItem(
+            "userProfile"
+          );
+
+
+        if (savedProfile) {
+
+          profile =
+            JSON.parse(
+              savedProfile
+            );
+
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Unable to read profile:",
+          error
+        );
+
+      }
+
+
+      /* =============================================== */
+      /* READ EMAIL */
+      /* =============================================== */
+
+      const email =
+        localStorage.getItem(
+          "userEmail"
+        );
+
+
+      /* =============================================== */
+      /* GET VALUES */
+      /* =============================================== */
+
+      const firstName =
+        profile.firstName || "";
+
+
+      const lastName =
+        profile.lastName || "";
+
+
+      const phoneNumber =
+        profile.phoneNumber || "";
+
+
+      const country =
+        profile.country || "";
+
+
+      const state =
+        profile.state || "";
+
+
+      const city =
+        profile.city || "";
+
+
+      const dateOfBirth =
+        profile.dateOfBirth || "";
+
+
+      /* =============================================== */
+      /* PROFILE NAME */
+      /* =============================================== */
+
+      const fullName =
+        `${firstName} ${lastName}`
+          .trim();
+
+
+      document.getElementById(
+        "profileName"
+      ).textContent =
+        fullName ||
+        "User Profile";
+
+
+      /* =============================================== */
+      /* EMAIL */
+      /* =============================================== */
+
+      document.getElementById(
+        "profileEmail"
+      ).textContent =
+        email ||
+        "No email available";
+
+
+      /* =============================================== */
+      /* DISPLAY DETAILS */
+      /* =============================================== */
+
+      document.getElementById(
+        "displayFirstName"
+      ).textContent =
+        firstName ||
+        "Not provided";
+
+
+      document.getElementById(
+        "displayLastName"
+      ).textContent =
+        lastName ||
+        "Not provided";
+
+
+      document.getElementById(
+        "displayPhoneNumber"
+      ).textContent =
+        phoneNumber ||
+        "Not provided";
+
+
+      document.getElementById(
+        "displayCountry"
+      ).textContent =
+        country ||
+        "Not provided";
+
+
+      document.getElementById(
+        "displayState"
+      ).textContent =
+        state ||
+        "Not provided";
+
+
+      document.getElementById(
+        "displayCity"
+      ).textContent =
+        city ||
+        "Not provided";
+
+
+      document.getElementById(
+        "displayDateOfBirth"
+      ).textContent =
+        dateOfBirth ||
+        "Not provided";
+
+
+      /* =============================================== */
+      /* SHOW PANEL */
+      /* =============================================== */
+
+      panel.style.display =
+        "flex";
+
+
+      document.body.style.overflow =
+        "hidden";
+
+    }
+
+
+    /* ===================================================== */
+    /* ================= CLOSE PROFILE ===================== */
+    /* ===================================================== */
+
+    function closeProfile() {
+
+      const panel =
+        document.getElementById(
+          "profilePanel"
+        );
+
+
+      if (!panel) {
+
+        return;
+
+      }
+
+
+      panel.style.display =
+        "none";
+
+
+      document.body.style.overflow =
+        "";
+
+    }
+
+
+    /* ===================================================== */
+    /* ================ CLICK OUTSIDE PANEL ================ */
+    /* ===================================================== */
+
+    document.addEventListener(
+      "click",
+      function (event) {
+
+        const panel =
+          document.getElementById(
+            "profilePanel"
+          );
+
+
+        const content =
+          document.querySelector(
+            ".profile-panel-content"
+          );
+
+
+        const profileButton =
+          document.getElementById(
+            "profileButton"
+          );
+
+
+        if (
+          panel &&
+          panel.style.display === "flex" &&
+          event.target === panel &&
+          !content.contains(event.target) &&
+          !profileButton.contains(event.target)
+        ) {
+
+          closeProfile();
+
+        }
+
+      }
+    );
+
+
+    /* ===================================================== */
+    /* ================= ESC KEY ============================ */
+    /* ===================================================== */
+
+    document.addEventListener(
+      "keydown",
+      function (event) {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          closeProfile();
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+
+</html>
