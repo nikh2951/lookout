@@ -1,2511 +1,690 @@
-/* =========================================================
-   LOOKOUT — AI EDIT
-   Liquid Glass UI
-   ========================================================= */
-
-
-/* =========================================================
-   PAGE
-   ========================================================= */
-
-.ai-edit-page {
-    position: relative;
-
-    width: 100%;
-    min-height: 100vh;
-
-    padding: 34px 42px 150px;
-
-    overflow: hidden;
-
-    color: #17191d;
-
-    background:
-        radial-gradient(
-            circle at 15% 20%,
-            rgba(116, 168, 255, 0.14),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 85% 15%,
-            rgba(196, 132, 255, 0.12),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 70% 85%,
-            rgba(88, 215, 190, 0.10),
-            transparent 30%
-        );
-}
-
-
-/* ambient glow */
-
-.ai-edit-page::before,
-.ai-edit-page::after {
-    content: "";
-
-    position: absolute;
-
-    width: 420px;
-    height: 420px;
-
-    border-radius: 50%;
-
-    filter: blur(90px);
-
-    pointer-events: none;
-
-    opacity: 0.32;
-
-    animation: aiEditFloat 12s ease-in-out infinite alternate;
-}
-
-
-.ai-edit-page::before {
-    top: -160px;
-    left: -100px;
-
-    background: rgba(90, 145, 255, 0.30);
-}
-
-
-.ai-edit-page::after {
-    right: -130px;
-    bottom: -160px;
-
-    background: rgba(190, 100, 255, 0.22);
-
-    animation-delay: -5s;
-}
-
-
-@keyframes aiEditFloat {
-
-    0% {
-        transform: translate3d(
-            -15px,
-            0,
-            0
-        ) scale(1);
-    }
-
-    50% {
-        transform: translate3d(
-            25px,
-            20px,
-            0
-        ) scale(1.08);
-    }
-
-    100% {
-        transform: translate3d(
-            -10px,
-            35px,
-            0
-        ) scale(0.96);
-    }
-}
-
-
-/* =========================================================
-   HEADER
-   ========================================================= */
-
-.ai-edit-header {
-    position: relative;
-    z-index: 2;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 30px;
-
-    margin-bottom: 25px;
-}
-
-
-.ai-edit-eyebrow {
-    display: inline-block;
-
-    margin-bottom: 7px;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    letter-spacing: 2.2px;
-
-    text-transform: uppercase;
-
-    color: rgba(80, 90, 110, 0.65);
-}
-
-
-.ai-edit-header h2 {
-    margin: 0;
-
-    font-size: clamp(
-        30px,
-        3vw,
-        46px
-    );
-
-    line-height: 1.05;
-
-    font-weight: 700;
-
-    letter-spacing: -1.5px;
-
-    color: #111318;
-}
-
-
-.ai-edit-header p {
-    margin: 10px 0 0;
-
-    max-width: 620px;
-
-    font-size: 14px;
-
-    line-height: 1.6;
-
-    color: rgba(55, 60, 70, 0.65);
-}
-
-
-/* =========================================================
-   SIMPLE / ADVANCED SWITCH
-   ========================================================= */
-
-.ai-edit-mode {
-    position: relative;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 4px;
-
-    padding: 5px;
-
-    border-radius: 18px;
-
-    border: 1px solid rgba(
-        255,
-        255,
-        255,
-        0.65
-    );
-
-    background: rgba(
-        255,
-        255,
-        255,
-        0.36
-    );
-
-    box-shadow:
-        inset 0 1px 0 rgba(
-            255,
-            255,
-            255,
-            0.8
-        ),
-        0 10px 35px rgba(
-            50,
-            70,
-            100,
-            0.08
-        );
-
-    backdrop-filter: blur(24px) saturate(150%);
-    -webkit-backdrop-filter: blur(24px) saturate(150%);
-}
-
-
-.mode-btn {
-    border: 0;
-
-    min-width: 105px;
-
-    padding: 10px 18px;
-
-    border-radius: 13px;
-
-    background: transparent;
-
-    color: rgba(
-        40,
-        45,
-        55,
-        0.60
-    );
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        background 0.25s ease,
-        color 0.25s ease,
-        transform 0.2s ease,
-        box-shadow 0.25s ease;
-}
-
-
-.mode-btn:hover {
-    color: #17191d;
-
-    transform: translateY(-1px);
-}
-
-
-.mode-btn.active {
-    color: #15171b;
-
-    background: rgba(
-        255,
-        255,
-        255,
-        0.76
-    );
-
-    box-shadow:
-        0 4px 15px rgba(
-            40,
-            55,
-            80,
-            0.10
-        ),
-        inset 0 1px 0 rgba(
-            255,
-            255,
-            255,
-            0.9
-        );
-}
-
-
-/* =========================================================
-   PREVIEW AREA
-   ========================================================= */
-
-.edit-preview-area {
-    position: relative;
-    z-index: 1;
-
-    min-height: 510px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 32px;
-
-    border-radius: 30px;
-
-    border: 1px solid rgba(
-        255,
-        255,
-        255,
-        0.62
-    );
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,0.50),
-            rgba(255,255,255,0.22)
-        );
-
-    box-shadow:
-        0 25px 70px rgba(
-            50,
-            65,
-            95,
-            0.10
-        ),
-        inset 0 1px 0 rgba(
-            255,
-            255,
-            255,
-            0.82
-        );
-
-    backdrop-filter:
-        blur(30px)
-        saturate(155%);
-
-    -webkit-backdrop-filter:
-        blur(30px)
-        saturate(155%);
-
-    overflow: hidden;
-}
-
-
-.edit-preview-area::before {
-    content: "";
-
-    position: absolute;
-
-    inset: 1px;
-
-    border-radius: 29px;
-
-    pointer-events: none;
-
-    background:
-        linear-gradient(
-            120deg,
-            rgba(255,255,255,0.28),
-            transparent 35%,
-            transparent 70%,
-            rgba(255,255,255,0.14)
-        );
-}
-
-
-/* =========================================================
-   UPLOAD AREA
-   ========================================================= */
-
-.center-upload {
-    position: relative;
-    z-index: 2;
-
-    width: min(
-        620px,
-        90%
-    );
-
-    min-height: 300px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 45px;
-
-    border-radius: 28px;
-
-    border: 1px dashed rgba(
-        110,
-        125,
-        155,
-        0.35
-    );
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.20
-        );
-
-    transition:
-        border-color 0.3s ease,
-        background 0.3s ease,
-        transform 0.3s ease;
-
-    overflow: hidden;
-}
-
-
-.center-upload:hover {
-    transform: translateY(-3px);
-
-    border-color: rgba(
-        95,
-        130,
-        220,
-        0.55
-    );
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.34
-        );
-}
-
-
-.center-upload::before {
-    content: "";
-
-    position: absolute;
-
-    width: 180px;
-    height: 180px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(
-            100,
-            150,
-            255,
-            0.12
-        );
-
-    filter: blur(45px);
-}
-
-
-.center-upload > * {
-    position: relative;
-    z-index: 1;
-}
-
-
-.center-upload > i {
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    width: 76px;
-    height: 76px;
-
-    margin-bottom: 20px;
-
-    border-radius: 24px;
-
-    font-size: 28px;
-
-    color: #5576d9;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,0.75),
-            rgba(225,232,255,0.42)
-        );
-
-    box-shadow:
-        0 15px 35px rgba(
-            75,
-            105,
-            180,
-            0.15
-        ),
-        inset 0 1px 0 rgba(
-            255,
-            255,
-            255,
-            0.95
-        );
-
-    animation:
-        uploadFloat 4s
-        ease-in-out
-        infinite;
-}
-
-
-@keyframes uploadFloat {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-7px);
-    }
-}
-
-
-.center-upload h2 {
-    margin: 0 0 8px;
-
-    font-size: 22px;
-
-    font-weight: 650;
-
-    color: #191b20;
-}
-
-
-.center-upload p {
-    margin: 0;
-
-    font-size: 13px;
-
-    color: rgba(
-        50,
-        55,
-        65,
-        0.60
-    );
-}
-
-
-.center-upload input {
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    opacity: 0;
-
-    cursor: pointer;
-}
-
-
-/* =========================================================
-   UPLOADED IMAGES
-   ========================================================= */
-
-.uploaded-images {
-    position: relative;
-    z-index: 2;
-
-    width: 100%;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 24px;
-
-    flex-wrap: wrap;
-}
-
-
-.image-wrapper {
-    position: relative;
-
-    width: min(
-        430px,
-        45%
-    );
-
-    min-width: 280px;
-
-    padding: 8px;
-
-    border-radius: 25px;
-
-    border: 1px solid rgba(
-        255,
-        255,
-        255,
-        0.70
-    );
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.28
-        );
-
-    box-shadow:
-        0 20px 45px rgba(
-            40,
-            55,
-            90,
-            0.13
-        ),
-        inset 0 1px 0 rgba(
-            255,
-            255,
-            255,
-            0.80
-        );
-
-    backdrop-filter: blur(18px);
-
-    animation:
-        imageAppear 0.45s
-        cubic-bezier(
-            0.22,
-            1,
-            0.36,
-            1
-        );
-}
-
+/* ===================== AI EDIT ======================= */
+/* ===================================================== */
 
-@keyframes imageAppear {
+/* ================= PAGE ================= */
 
-    from {
-        opacity: 0;
+.ai-edit-page{
 
-        transform:
-            translateY(14px)
-            scale(0.97);
-    }
+  width:100%;
+  height:100%;
 
-    to {
-        opacity: 1;
+  display:flex;
+  flex-direction:column;
 
-        transform:
-            translateY(0)
-            scale(1);
-    }
-}
-
-
-.preview-image {
-    display: block;
-
-    width: 100%;
-
-    max-height: 430px;
-
-    object-fit: contain;
-
-    border-radius: 19px;
-
-    background:
-        rgba(
-            20,
-            22,
-            27,
-            0.06
-        );
-}
-
-
-/* =========================================================
-   IMAGE REMOVE BUTTON
-   ========================================================= */
-
-.remove-image-btn {
-    position: absolute;
-
-    top: 17px;
-    right: 17px;
-
-    width: 34px;
-    height: 34px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid rgba(
-        255,
-        255,
-        255,
-        0.65
-    );
-
-    border-radius: 50%;
-
-    color: #25272c;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.68
-        );
-
-    box-shadow:
-        0 8px 20px rgba(
-            20,
-            25,
-            35,
-            0.12
-        );
-
-    backdrop-filter: blur(15px);
-
-    cursor: pointer;
-
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        color 0.2s ease;
-}
-
-
-.remove-image-btn:hover {
-    transform:
-        scale(1.08)
-        rotate(4deg);
-
-    color: #e54848;
-
-    background:
-        rgba(
-            255,
-            235,
-            235,
-            0.90
-        );
-}
-
-
-/* =========================================================
-   BOTTOM GLASS BAR
-   ========================================================= */
-
-.edit-bottom-bar {
-    position: fixed;
-
-    z-index: 20;
-
-    left: 50%;
-
-    bottom: 25px;
-
-    width: min(
-        980px,
-        calc(100% - 50px)
-    );
-
-    transform: translateX(-50%);
-
-    padding: 10px;
-
-    border-radius: 25px;
-
-    border: 1px solid rgba(
-        255,
-        255,
-        255,
-        0.70
-    );
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,0.68),
-            rgba(245,247,255,0.42)
-        );
-
-    box-shadow:
-        0 20px 55px rgba(
-            30,
-            45,
-            75,
-            0.16
-        ),
-        inset 0 1px 0 rgba(
-            255,
-            255,
-            255,
-            0.90
-        );
-
-    backdrop-filter:
-        blur(28px)
-        saturate(165%);
-
-    -webkit-backdrop-filter:
-        blur(28px)
-        saturate(165%);
-
-    animation:
-        barAppear 0.4s
-        cubic-bezier(
-            0.22,
-            1,
-            0.36,
-            1
-        );
-}
-
-
-@keyframes barAppear {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translate(-50%, 20px)
-            scale(0.97);
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            translate(-50%, 0)
-            scale(1);
-    }
-}
-
-
-.edit-control-row {
-    display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    width: 100%;
-}
-
-
-/* =========================================================
-   ADD IMAGE
-   ========================================================= */
-
-.upload-again-btn {
-    position: relative;
-
-    flex: 0 0 45px;
-
-    width: 45px;
-    height: 45px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 15px;
-
-    color: #4e64b7;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.50
-        );
-
-    border: 1px solid rgba(
-        255,
-        255,
-        255,
-        0.60
-    );
-
-    cursor: pointer;
-
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease;
-}
-
-
-.upload-again-btn:hover {
-    transform: translateY(-2px);
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.80
-        );
-}
-
-
-.upload-again-btn input {
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    opacity: 0;
-
-    cursor: pointer;
-}
-
-
-/* =========================================================
-   OPERATION SELECT
-   ========================================================= */
-
-.operation-select-wrap {
-    position: relative;
-
-    flex: 0 0 180px;
-
-    height: 45px;
-
-    display: flex;
-
-    align-items: center;
-
-    padding: 0 11px;
-
-    border-radius: 15px;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.48
-        );
-
-    border: 1px solid rgba(
-        255,
-        255,
-        255,
-        0.62
-    );
-
-    transition:
-        background 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-.operation-select-wrap:hover {
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.68
-        );
-
-    box-shadow:
-        0 6px 20px rgba(
-            50,
-            70,
-            110,
-            0.08
-        );
-}
-
-
-.operation-select-wrap > i {
-    flex: 0 0 22px;
+  justify-content:space-between;
 
-    color: #6177d3;
+  padding:35px;
 
-    font-size: 14px;
+  animation:fadeUp 0.45s ease;
 }
 
+/* ================= PREVIEW AREA ================= */
 
-.operation-select-wrap select {
-    width: 100%;
+.edit-preview-area{
 
-    height: 100%;
+  flex:1;
 
-    border: 0;
+  width:100%;
 
-    outline: 0;
+  max-height:620px;
 
-    background: transparent;
+  border-radius:38px;
 
-    color: #24272d;
+  position:relative;
 
-    font-size: 12px;
+  overflow:hidden;
 
-    font-weight: 600;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 
-    cursor: pointer;
+  padding:30px;
 
-    appearance: none;
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,0.18),
+    rgba(255,255,255,0.05)
+  );
 
-    padding-left: 5px;
-}
-
-
-.operation-select-wrap::after {
-    content: "⌄";
-
-    position: absolute;
-
-    right: 11px;
-
-    top: 50%;
-
-    transform: translateY(-55%);
-
-    pointer-events: none;
-
-    font-size: 13px;
-
-    color: rgba(
-        50,
-        55,
-        65,
-        0.50
-    );
-}
+  backdrop-filter:blur(35px);
+  -webkit-backdrop-filter:blur(35px);
 
+  border:1px solid rgba(255,255,255,0.35);
 
-.operation-select-wrap select option {
-    background: #ffffff;
-
-    color: #1c1e23;
+  box-shadow:
+  inset 0 2px 6px rgba(255,255,255,0.7),
+  0 15px 40px rgba(0,0,0,0.08);
 }
-
-
-/* =========================================================
-   PROMPT
-   ========================================================= */
-
-#editPrompt {
-    flex: 1;
-
-    min-width: 180px;
 
-    height: 45px;
+/* ================= CENTER UPLOAD ================= */
 
-    resize: none;
+.center-upload{
 
-    padding: 13px 15px;
+  width:380px;
+  height:220px;
 
-    border-radius: 15px;
+  border-radius:32px;
 
-    border: 1px solid rgba(
-        255,
-        255,
-        255,
-        0.58
-    );
+  display:flex;
+  flex-direction:column;
 
-    outline: none;
+  justify-content:center;
+  align-items:center;
 
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.43
-        );
+  gap:12px;
 
-    color: #1d2025;
+  position:relative;
 
-    font-family: inherit;
+  color:#6b7280;
 
-    font-size: 12px;
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,0.16),
+    rgba(255,255,255,0.05)
+  );
 
-    line-height: 19px;
+  backdrop-filter:blur(28px);
+  -webkit-backdrop-filter:blur(28px);
 
-    box-shadow:
-        inset 0 1px 1px rgba(
-            50,
-            60,
-            80,
-            0.03
-        );
+  border:1px solid rgba(255,255,255,0.28);
 
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-#editPrompt::placeholder {
-    color: rgba(
-        55,
-        60,
-        70,
-        0.48
-    );
-}
+  box-shadow:
+  inset 0 2px 6px rgba(255,255,255,0.7),
+  0 12px 30px rgba(0,0,0,0.08);
 
-
-#editPrompt:focus {
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.72
-        );
-
-    border-color:
-        rgba(
-            100,
-            125,
-            215,
-            0.42
-        );
-
-    box-shadow:
-        0 0 0 4px rgba(
-            100,
-            125,
-            215,
-            0.08
-        );
+  transition:0.35s ease;
 }
-
 
-/* =========================================================
-   GENERATE BUTTON
-   ========================================================= */
+/* ================= UPLOAD HOVER ================= */
 
-.generate-btn {
-    position: relative;
+.center-upload:hover{
 
-    flex: 0 0 47px;
-
-    width: 47px;
-    height: 47px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border: 0;
-
-    border-radius: 16px;
-
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #667eea,
-            #8c68df
-        );
-
-    box-shadow:
-        0 10px 25px rgba(
-            102,
-            126,
-            234,
-            0.30
-        ),
-        inset 0 1px 0 rgba(
-            255,
-            255,
-            255,
-            0.38
-        );
-
-    cursor: pointer;
-
-    overflow: hidden;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+  transform:
+  translateY(-3px)
+  scale(1.01);
 }
 
+/* ================= UPLOAD ICON ================= */
 
-.generate-btn::before {
-    content: "";
+.center-upload i{
 
-    position: absolute;
+  font-size:52px;
 
-    width: 80px;
-    height: 80px;
-
-    top: -40px;
-    left: -60px;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.28
-        );
-
-    transform:
-        rotate(30deg);
-
-    transition:
-        left 0.5s ease;
-}
-
-
-.generate-btn:hover::before {
-    left: 65px;
+  color:#111827;
 }
 
+/* ================= UPLOAD TEXT ================= */
 
-.generate-btn:hover {
-    transform:
-        translateY(-2px)
-        scale(1.03);
-
-    box-shadow:
-        0 14px 30px rgba(
-            102,
-            126,
-            234,
-            0.38
-        );
-}
+.center-upload h2{
 
+  font-size:22px;
 
-.generate-btn:active {
-    transform:
-        translateY(1px)
-        scale(0.97);
+  color:#111827;
 }
-
 
-.generate-btn:disabled {
-    opacity: 0.60;
+.center-upload p{
 
-    cursor: wait;
+  font-size:15px;
 
-    transform: none;
+  color:#6b7280;
 }
-
-
-/* =========================================================
-   ADVANCED CONTROLS
-   ========================================================= */
-
-.advanced-controls {
-    display: flex;
 
-    align-items: center;
-    justify-content: space-between;
+/* ================= HIDE INPUT ================= */
 
-    gap: 20px;
+.center-upload input{
 
-    margin-top: 8px;
+  position:absolute;
 
-    padding: 7px 8px 2px;
+  inset:0;
 
-    font-size: 10px;
+  opacity:0;
 
-    color: rgba(
-        50,
-        55,
-        65,
-        0.55
-    );
+  cursor:pointer;
 }
 
+/* ================= IMAGE GRID ================= */
 
-.advanced-controls span {
-    display: flex;
+.uploaded-images{
 
-    align-items: center;
+  width:100%;
 
-    gap: 6px;
-}
+  display:grid;
 
+  grid-template-columns:
+  repeat(2,1fr);
 
-.advanced-controls i {
-    color: #6a7fd0;
+  gap:22px;
 }
-
-
-/* =========================================================
-   STATUS
-   ========================================================= */
-
-.edit-status {
-    position: absolute;
-
-    z-index: 5;
-
-    bottom: 95px;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 9px;
 
-    padding: 10px 17px;
+/* ================= IMAGE PREVIEW ================= */
 
-    border-radius: 14px;
+.preview-image{
 
-    border: 1px solid rgba(
-        255,
-        255,
-        255,
-        0.65
-    );
+  width:100%;
+  height:520px;
 
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.65
-        );
+  object-fit:contain;
 
-    box-shadow:
-        0 12px 35px rgba(
-            30,
-            45,
-            70,
-            0.12
-        );
+  transform:none;
 
-    backdrop-filter: blur(18px);
+  border-radius:32px;
 
-    font-size: 12px;
+  border:1px solid rgba(255,255,255,0.25);
 
-    font-weight: 600;
+  box-shadow:
+  0 10px 25px rgba(0,0,0,0.12);
 
-    color: #30333a;
-
-    animation:
-        statusAppear 0.3s ease;
+  animation:fadeUp 0.4s ease;
 }
-
 
-@keyframes statusAppear {
+/* ================= BOTTOM BAR ================= */
 
-    from {
-        opacity: 0;
+.edit-bottom-bar{
 
-        transform:
-            translate(-50%, 8px);
-    }
+  width:100%;
 
-    to {
-        opacity: 1;
+  max-width:980px;
 
-        transform:
-            translate(-50%, 0);
-    }
-}
+  margin:28px auto 0 auto;
 
+  display:flex;
 
-.edit-status.error {
-    color: #bd4545;
+  align-items:center;
 
-    background:
-        rgba(
-            255,
-            240,
-            240,
-            0.72
-        );
+  gap:16px;
 }
 
+/* ================= HIDDEN ================= */
 
-.edit-status.success {
-    color: #348060;
+.edit-bottom-bar.hidden{
 
-    background:
-        rgba(
-            235,
-            255,
-            245,
-            0.72
-        );
+    display:none;
 }
-
-
-.status-spinner {
-    width: 14px;
-    height: 14px;
 
-    border-radius: 50%;
+/* ================= PROMPT BOX ================= */
 
-    border: 2px solid rgba(
-        95,
-        115,
-        190,
-        0.20
-    );
+.edit-bottom-bar textarea{
 
-    border-top-color:
-        #657be0;
+  flex:1;
 
-    animation:
-        statusSpin 0.75s
-        linear infinite;
-}
+  height:68px;
 
+  border:none;
+  outline:none;
 
-@keyframes statusSpin {
-
-    to {
-        transform: rotate(360deg);
-    }
-}
+  resize:none;
 
+  border-radius:999px;
 
-/* =========================================================
-   COMPARISON
-   ========================================================= */
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,0.18),
+    rgba(255,255,255,0.05)
+  );
 
-.comparison-panel {
-    position: relative;
+  backdrop-filter:blur(35px);
+  -webkit-backdrop-filter:blur(35px);
 
-    z-index: 4;
+  border:1px solid rgba(255,255,255,0.18);
 
-    width: 100%;
+  box-shadow:
+  inset 0 2px 6px rgba(255,255,255,0.55),
+  0 10px 30px rgba(0,0,0,0.06);
 
-    display: grid;
+  font-size:17px;
 
-    grid-template-columns:
-        repeat(
-            2,
-            minmax(0, 1fr)
-        );
+  color:#111827;
 
-    gap: 20px;
+  padding:20px 24px;
 
-    margin-top: 5px;
+  font-family:'Segoe UI',sans-serif;
 
-    animation:
-        imageAppear 0.5s
-        ease;
+  overflow:hidden;
 }
 
+/* ================= ADD IMAGE BUTTON ================= */
 
-.comparison-card {
-    position: relative;
-
-    min-height: 240px;
-
-    padding: 9px;
-
-    border-radius: 23px;
-
-    border: 1px solid rgba(
-        255,
-        255,
-        255,
-        0.65
-    );
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.26
-        );
-
-    box-shadow:
-        0 15px 35px rgba(
-            40,
-            55,
-            85,
-            0.10
-        ),
-        inset 0 1px 0 rgba(
-            255,
-            255,
-            255,
-            0.75
-        );
-
-    overflow: hidden;
-
-    backdrop-filter: blur(15px);
-}
+.upload-again-btn{
 
+  width:68px;
+  height:68px;
 
-.comparison-card > span {
-    position: absolute;
+  min-width:68px;
 
-    z-index: 2;
+  border-radius:50%;
 
-    top: 17px;
-    left: 17px;
+  cursor:pointer;
 
-    padding: 6px 10px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 
-    border-radius: 9px;
+  position:relative;
 
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.70
-        );
+  overflow:hidden;
 
-    color: #363940;
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,0.38),
+    rgba(255,255,255,0.08)
+  );
 
-    font-size: 10px;
+  backdrop-filter:blur(28px) saturate(180%);
+  -webkit-backdrop-filter:blur(28px) saturate(180%);
 
-    font-weight: 700;
+  border:1px solid rgba(255,255,255,0.55);
 
-    letter-spacing: 0.4px;
+  box-shadow:
+  inset 0 2px 5px rgba(255,255,255,0.85),
+  inset 0 -2px 5px rgba(255,255,255,0.18),
+  0 10px 24px rgba(0,0,0,0.08);
 
-    backdrop-filter: blur(10px);
+  transition:
+  all 0.35s cubic-bezier(0.22,1,0.36,1);
 }
-
-
-.comparison-card img {
-    display: block;
 
-    width: 100%;
-    height: 100%;
+/* ================= ADD BUTTON ICON ================= */
 
-    min-height: 280px;
+.upload-again-btn i{
 
-    object-fit: contain;
+  position:relative;
 
-    border-radius: 17px;
+  z-index:2;
 
-    background:
-        rgba(
-            20,
-            25,
-            30,
-            0.05
-        );
-}
-
-
-/* =========================================================
-   RESULT
-   ========================================================= */
-
-.result-wrapper {
-    width: min(
-        620px,
-        90%
-    );
-}
+  font-size:20px;
 
-
-.edited-result {
-    max-height: 500px;
+  color:#000000;
 }
-
-
-.result-reset-btn {
-    position: absolute;
-
-    right: 17px;
-    top: 17px;
-
-    width: 35px;
-    height: 35px;
-
-    display: flex;
 
-    align-items: center;
-    justify-content: center;
+/* ================= HIDE INPUT ================= */
 
-    border: 1px solid rgba(
-        255,
-        255,
-        255,
-        0.65
-    );
+.upload-again-btn input{
 
-    border-radius: 50%;
+  position:absolute;
 
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.70
-        );
+  inset:0;
 
-    color: #41444b;
+  opacity:0;
 
-    cursor: pointer;
-
-    backdrop-filter: blur(15px);
-
-    transition:
-        transform 0.2s ease,
-        color 0.2s ease;
+  cursor:pointer;
 }
-
 
-.result-reset-btn:hover {
-    transform:
-        rotate(-20deg)
-        scale(1.08);
+/* ================= GENERATE BUTTON ================= */
 
-    color: #566dd0;
-}
+.generate-btn{
 
+  width:68px;
+  height:68px;
 
-/* =========================================================
-   MENU BUTTON
-   ========================================================= */
+  min-width:68px;
 
-.workspace-menu-btn {
-    display: none;
+  border:none;
+  outline:none;
 
-    position: absolute;
+  border-radius:50%;
 
-    top: 22px;
-    left: 20px;
+  cursor:pointer;
 
-    z-index: 50;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 
-    width: 42px;
-    height: 42px;
+  position:relative;
 
-    border: 1px solid rgba(
-        255,
-        255,
-        255,
-        0.65
-    );
+  overflow:hidden;
 
-    border-radius: 14px;
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,0.38),
+    rgba(255,255,255,0.08)
+  );
 
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.52
-        );
+  backdrop-filter:blur(28px) saturate(180%);
+  -webkit-backdrop-filter:blur(28px) saturate(180%);
 
-    color: #30333a;
+  border:1px solid rgba(255,255,255,0.55);
 
-    backdrop-filter: blur(18px);
+  box-shadow:
+  inset 0 2px 5px rgba(255,255,255,0.85),
+  inset 0 -2px 5px rgba(255,255,255,0.18),
+  0 10px 24px rgba(0,0,0,0.08);
 
-    cursor: pointer;
+  transition:
+  all 0.35s cubic-bezier(0.22,1,0.36,1);
 }
 
+/* ================= BUTTON SHINE ================= */
 
-/* =========================================================
-   UTILITIES
-   ========================================================= */
+.generate-btn::before,
+.upload-again-btn::before{
 
-.hidden {
-    display: none !important;
-}
+  content:"";
 
+  position:absolute;
 
-/* =========================================================
-   DARK MODE
-   ========================================================= */
-
-body.dark-mode .ai-edit-page,
-.dark-mode .ai-edit-page {
-    color: #f3f5fa;
-
-    background:
-        radial-gradient(
-            circle at 15% 20%,
-            rgba(85, 125, 255, 0.12),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 85% 15%,
-            rgba(170, 95, 255, 0.12),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 70% 85%,
-            rgba(60, 190, 170, 0.08),
-            transparent 30%
-        );
-}
+  top:-140%;
+  left:-50%;
 
+  width:70%;
+  height:320%;
 
-body.dark-mode .ai-edit-header h2,
-.dark-mode .ai-edit-header h2 {
-    color: #f4f6fb;
-}
+  background:
+  linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.85),
+    transparent
+  );
 
+  transform:rotate(25deg);
 
-body.dark-mode .ai-edit-header p,
-.dark-mode .ai-edit-header p {
-    color: rgba(
-        225,
-        230,
-        240,
-        0.56
-    );
+  animation:buttonShine 5s linear infinite;
 }
 
+/* ================= GENERATE ICON ================= */
 
-body.dark-mode .ai-edit-eyebrow,
-.dark-mode .ai-edit-eyebrow {
-    color: rgba(
-        210,
-        220,
-        235,
-        0.48
-    );
-}
+.generate-btn i{
 
+  position:relative;
 
-body.dark-mode .ai-edit-mode,
-.dark-mode .ai-edit-mode {
-    border-color: rgba(
-        255,
-        255,
-        255,
-        0.10
-    );
-
-    background:
-        rgba(
-            25,
-            29,
-            38,
-            0.52
-        );
-
-    box-shadow:
-        inset 0 1px 0 rgba(
-            255,
-            255,
-            255,
-            0.08
-        ),
-        0 15px 40px rgba(
-            0,
-            0,
-            0,
-            0.20
-        );
-}
+  z-index:2;
 
+  font-size:20px;
 
-body.dark-mode .mode-btn,
-.dark-mode .mode-btn {
-    color: rgba(
-        220,
-        225,
-        235,
-        0.52
-    );
+  color:#000000;
 }
 
+/* ================= HOVER ================= */
 
-body.dark-mode .mode-btn.active,
-.dark-mode .mode-btn.active {
-    color: #f4f6fb;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.10
-        );
-
-    box-shadow:
-        inset 0 1px 0 rgba(
-            255,
-            255,
-            255,
-            0.08
-        );
-}
+.generate-btn:hover,
+.upload-again-btn:hover{
 
-
-body.dark-mode .edit-preview-area,
-.dark-mode .edit-preview-area {
-    border-color: rgba(
-        255,
-        255,
-        255,
-        0.10
-    );
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(30,35,46,0.62),
-            rgba(20,24,32,0.40)
-        );
-
-    box-shadow:
-        0 25px 70px rgba(
-            0,
-            0,
-            0,
-            0.25
-        ),
-        inset 0 1px 0 rgba(
-            255,
-            255,
-            255,
-            0.07
-        );
+  transform:
+  translateY(-3px)
+  scale(1.08);
 }
 
+/* ================= DARK MODE ================= */
 
-body.dark-mode .center-upload,
-.dark-mode .center-upload {
-    border-color: rgba(
-        255,
-        255,
-        255,
-        0.14
-    );
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.035
-        );
-}
+body.dark-mode .center-upload{
 
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,0.08),
+    rgba(255,255,255,0.03)
+  );
 
-body.dark-mode .center-upload:hover,
-.dark-mode .center-upload:hover {
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.065
-        );
-
-    border-color:
-        rgba(
-            115,
-            145,
-            235,
-            0.45
-        );
+  border:1px solid rgba(255,255,255,0.08);
 }
 
+/* ================= DARK TEXT ================= */
 
 body.dark-mode .center-upload h2,
-.dark-mode .center-upload h2 {
-    color: #f2f4f8;
+body.dark-mode .center-upload i{
+
+  color:white;
 }
 
+body.dark-mode .center-upload p{
 
-body.dark-mode .center-upload p,
-.dark-mode .center-upload p {
-    color: rgba(
-        220,
-        225,
-        235,
-        0.50
-    );
+  color:#d1d5db;
 }
 
+/* ================= DARK TEXTAREA ================= */
 
-body.dark-mode .center-upload > i,
-.dark-mode .center-upload > i {
-    color: #8da2ff;
+body.dark-mode .edit-bottom-bar textarea{
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(100,120,200,0.25),
-            rgba(80,95,160,0.12)
-        );
-
-    box-shadow:
-        0 15px 35px rgba(
-            50,
-            70,
-            150,
-            0.20
-        ),
-        inset 0 1px 0 rgba(
-            255,
-            255,
-            255,
-            0.12
-        );
+  color:white;
 }
 
+/* ================= DARK BUTTONS ================= */
 
-body.dark-mode .image-wrapper,
-.dark-mode .image-wrapper {
-    border-color: rgba(
-        255,
-        255,
-        255,
-        0.10
-    );
+body.dark-mode .generate-btn,
+body.dark-mode .upload-again-btn{
 
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.055
-        );
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,0.14),
+    rgba(255,255,255,0.04)
+  );
 
-    box-shadow:
-        0 20px 45px rgba(
-            0,
-            0,
-            0,
-            0.24
-        ),
-        inset 0 1px 0 rgba(
-            255,
-            255,
-            255,
-            0.07
-        );
+  border:1px solid rgba(255,255,255,0.12);
+
+  box-shadow:
+  inset 0 2px 5px rgba(255,255,255,0.08),
+  0 10px 24px rgba(0,0,0,0.28);
 }
 
+/* ================= DARK ICONS ================= */
 
-body.dark-mode .remove-image-btn,
-.dark-mode .remove-image-btn {
-    color: #e8ebf3;
+body.dark-mode .generate-btn i,
+body.dark-mode .upload-again-btn i{
 
-    border-color: rgba(
-        255,
-        255,
-        255,
-        0.12
-    );
-
-    background:
-        rgba(
-            30,
-            34,
-            43,
-            0.72
-        );
+  color:white;
 }
 
+/* ================= ANIMATION ================= */
 
-body.dark-mode .edit-bottom-bar,
-.dark-mode .edit-bottom-bar {
-    border-color: rgba(
-        255,
-        255,
-        255,
-        0.11
-    );
+@keyframes fadeUp{
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(35,40,51,0.78),
-            rgba(24,28,36,0.64)
-        );
+  from{
 
-    box-shadow:
-        0 20px 55px rgba(
-            0,
-            0,
-            0,
-            0.35
-        ),
-        inset 0 1px 0 rgba(
-            255,
-            255,
-            255,
-            0.08
-        );
+    opacity:0;
+
+    transform:
+    translateY(25px);
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:
+    translateY(0px);
+  }
 }
 
+/* ================= SHINE ================= */
 
-body.dark-mode .upload-again-btn,
-.dark-mode .upload-again-btn,
-body.dark-mode .operation-select-wrap,
-.dark-mode .operation-select-wrap,
-body.dark-mode #editPrompt,
-.dark-mode #editPrompt {
-    color: #e9ecf3;
+@keyframes buttonShine{
 
-    border-color: rgba(
-        255,
-        255,
-        255,
-        0.10
-    );
+  0%{
 
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.065
-        );
+    transform:
+    translateX(-160%)
+    rotate(25deg);
+  }
+
+  100%{
+
+    transform:
+    translateX(260%)
+    rotate(25deg);
+  }
+}
+/* ================= IMAGE WRAPPER ================= */
+
+.image-wrapper{
+
+  position:relative;
+
+  width:100%;
 }
 
+/* ================= REMOVE BUTTON ================= */
 
-body.dark-mode
-.operation-select-wrap
-select,
-.dark-mode
-.operation-select-wrap
-select {
-    color: #edf0f7;
+.remove-image-btn{
+
+  position:absolute;
+
+  top:16px;
+  right:16px;
+
+  width:42px;
+  height:42px;
+
+  border:none;
+  outline:none;
+
+  border-radius:50%;
+
+  cursor:pointer;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,0.38),
+    rgba(255,255,255,0.08)
+  );
+
+  backdrop-filter:blur(25px);
+  -webkit-backdrop-filter:blur(25px);
+
+  border:1px solid rgba(255,255,255,0.45);
+
+  box-shadow:
+  0 8px 20px rgba(0,0,0,0.12);
+
+  transition:0.3s ease;
+
+  z-index:5;
 }
 
+/* ================= REMOVE ICON ================= */
 
-body.dark-mode
-.operation-select-wrap
-select option,
-.dark-mode
-.operation-select-wrap
-select option {
-    background: #242832;
+.remove-image-btn i{
 
-    color: #f0f2f7;
+  color:#000000;
+
+  font-size:16px;
 }
 
+/* ================= HOVER ================= */
 
-body.dark-mode #editPrompt::placeholder,
-.dark-mode #editPrompt::placeholder {
-    color: rgba(
-        220,
-        225,
-        235,
-        0.38
-    );
+.remove-image-btn:hover{
+
+  transform:
+  scale(1.08);
 }
 
+/* ================= DARK MODE ================= */
 
-body.dark-mode .advanced-controls,
-.dark-mode .advanced-controls {
-    color: rgba(
-        220,
-        225,
-        235,
-        0.42
-    );
+body.dark-mode .remove-image-btn i{
+
+  color:white;
 }
 
+/* ================= IMAGE WRAPPER ================= */
 
-body.dark-mode .comparison-card,
-.dark-mode .comparison-card {
-    border-color: rgba(
-        255,
-        255,
-        255,
-        0.10
-    );
+.image-wrapper{
 
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.045
-        );
+  position:relative;
+
+  width:100%;
 }
 
+/* ================= REMOVE BUTTON ================= */
 
-body.dark-mode .comparison-card > span,
-.dark-mode .comparison-card > span {
-    color: #edf0f6;
+.remove-image-btn{
 
-    background:
-        rgba(
-            25,
-            29,
-            37,
-            0.76
-        );
+  position:absolute;
+
+  top:16px;
+  right:16px;
+
+  width:42px;
+  height:42px;
+
+  border:none;
+  outline:none;
+
+  border-radius:50%;
+
+  cursor:pointer;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,0.38),
+    rgba(255,255,255,0.08)
+  );
+
+  backdrop-filter:blur(25px);
+  -webkit-backdrop-filter:blur(25px);
+
+  border:1px solid rgba(255,255,255,0.45);
+
+  box-shadow:
+  0 8px 20px rgba(0,0,0,0.12);
+
+  transition:0.3s ease;
+
+  z-index:5;
 }
 
+/* ================= REMOVE ICON ================= */
 
-body.dark-mode .result-reset-btn,
-.dark-mode .result-reset-btn {
-    color: #e8ebf3;
+.remove-image-btn i{
 
-    border-color: rgba(
-        255,
-        255,
-        255,
-        0.10
-    );
+  color:#000000;
 
-    background:
-        rgba(
-            30,
-            34,
-            43,
-            0.72
-        );
+  font-size:16px;
 }
 
+/* ================= HOVER ================= */
 
-body.dark-mode .workspace-menu-btn,
-.dark-mode .workspace-menu-btn {
-    color: #edf0f7;
+.remove-image-btn:hover{
 
-    border-color: rgba(
-        255,
-        255,
-        255,
-        0.12
-    );
-
-    background:
-        rgba(
-            30,
-            34,
-            43,
-            0.68
-        );
+  transform:
+  scale(1.08);
 }
 
+/* ================= DARK MODE ================= */
 
-body.dark-mode .edit-status,
-.dark-mode .edit-status {
-    color: #e9ecf3;
+body.dark-mode .remove-image-btn i{
 
-    border-color: rgba(
-        255,
-        255,
-        255,
-        0.10
-    );
-
-    background:
-        rgba(
-            30,
-            35,
-            44,
-            0.76
-        );
+  color:white;
 }
 
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 1000px) {
-
-    .ai-edit-page {
-        padding:
-            28px
-            25px
-            145px;
-    }
-
-
-    .ai-edit-header {
-        align-items: flex-start;
-    }
-
-
-    .operation-select-wrap {
-        flex-basis: 160px;
-    }
-
-
-    .image-wrapper {
-        width: 46%;
-    }
-
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 768px) {
-
-    .ai-edit-page {
-        min-height: 100vh;
-
-        padding:
-            75px
-            14px
-            125px;
-
-        overflow-y: auto;
-    }
-
-
-    .workspace-menu-btn {
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
-    }
-
-
-    .ai-edit-header {
-        flex-direction: column;
-
-        align-items: flex-start;
-
-        gap: 17px;
-
-        margin-bottom: 18px;
-
-        padding: 0 5px;
-    }
-
-
-    .ai-edit-header h2 {
-        font-size: 31px;
-    }
-
-
-    .ai-edit-header p {
-        font-size: 12px;
-
-        max-width: 95%;
-    }
-
-
-    .ai-edit-mode {
-        width: 100%;
-    }
-
-
-    .mode-btn {
-        flex: 1;
-
-        min-width: 0;
-    }
-
-
-    .edit-preview-area {
-        min-height: 430px;
-
-        padding: 15px;
-
-        border-radius: 25px;
-    }
-
-
-    .center-upload {
-        width: 100%;
-
-        min-height: 310px;
-
-        padding: 30px 18px;
-
-        border-radius: 23px;
-    }
-
-
-    .center-upload h2 {
-        font-size: 19px;
-    }
-
-
-    .center-upload p {
-        text-align: center;
-
-        font-size: 11px;
-    }
-
-
-    .uploaded-images {
-        gap: 14px;
-    }
-
-
-    .image-wrapper {
-        width: 100%;
-
-        min-width: 0;
-
-        max-width: 520px;
-    }
-
-
-    .comparison-panel {
-        grid-template-columns: 1fr;
-
-        gap: 14px;
-    }
-
-
-    .comparison-card {
-        min-height: 200px;
-    }
-
-
-    .comparison-card img {
-        min-height: 220px;
-    }
-
-
-    .edit-bottom-bar {
-        bottom: 12px;
-
-        width: calc(
-            100% - 20px
-        );
-
-        padding: 8px;
-
-        border-radius: 21px;
-    }
-
-
-    .edit-control-row {
-        display: grid;
-
-        grid-template-columns:
-            42px
-            1fr
-            45px;
-
-        gap: 7px;
-    }
-
-
-    .upload-again-btn {
-        width: 42px;
-        height: 42px;
-
-        flex-basis: 42px;
-    }
-
-
-    .operation-select-wrap {
-        grid-column: 2;
-
-        width: 100%;
-
-        height: 42px;
-    }
-
-
-    #editPrompt {
-        grid-column: 1 / 3;
-
-        width: 100%;
-
-        height: 42px;
-    }
-
-
-    .generate-btn {
-        grid-column: 3;
-        grid-row: 1;
-
-        width: 45px;
-        height: 45px;
-    }
-
-
-    .advanced-controls {
-        display: none;
-    }
-
-
-    .edit-status {
-        bottom: 115px;
-
-        max-width: calc(
-            100% - 35px
-        );
-
-        white-space: nowrap;
-
-        overflow: hidden;
-
-        text-overflow: ellipsis;
-    }
-
-}
-
-
-/* =========================================================
-   SMALL PHONES
-   ========================================================= */
-
-@media (max-width: 480px) {
-
-    .ai-edit-page {
-        padding:
-            70px
-            10px
-            120px;
-    }
-
-
-    .ai-edit-header h2 {
-        font-size: 28px;
-    }
-
-
-    .ai-edit-mode {
-        border-radius: 15px;
-    }
-
-
-    .mode-btn {
-        padding:
-            9px
-            10px;
-
-        font-size: 11px;
-    }
-
-
-    .edit-preview-area {
-        min-height: 390px;
-
-        padding: 10px;
-    }
-
-
-    .center-upload {
-        min-height: 285px;
-    }
-
-
-    .center-upload > i {
-        width: 65px;
-        height: 65px;
-
-        font-size: 23px;
-    }
-
-
-    .center-upload h2 {
-        font-size: 17px;
-    }
-
-
-    .center-upload p {
-        font-size: 10px;
-    }
-
-
-    .edit-bottom-bar {
-        width: calc(
-            100% - 14px
-        );
-
-        bottom: 7px;
-    }
-
-
-    .operation-select-wrap select {
-        font-size: 11px;
-    }
-
-
-    #editPrompt {
-        font-size: 11px;
-
-        padding:
-            11px
-            12px;
-    }
-
-
-    .generate-btn {
-        width: 43px;
-        height: 43px;
-    }
-
-}
+/* ===================================================== */
+
+/* ===== LOOKOUT AI EDIT UPDATED UI ===== */
+.ai-edit-page .ai-edit-header{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:18px}
+.ai-edit-page .ai-edit-title{font-size:clamp(30px,3vw,46px);font-weight:800;margin:0}
+.ai-edit-page .ai-edit-subtitle{margin:8px 0 0;opacity:.75;font-size:16px}
+.ai-edit-page .mode-switch{display:flex;gap:4px;padding:4px;border-radius:18px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(20px)}
+.ai-edit-page .mode-btn{border:0;border-radius:14px;padding:11px 18px;background:transparent;color:inherit;font-weight:700;cursor:pointer}
+.ai-edit-page .mode-btn.active{background:rgba(255,255,255,.18);box-shadow:inset 0 1px 2px rgba(255,255,255,.35)}
+.ai-edit-page .comparison-panel{display:grid;grid-template-columns:1fr 1fr;gap:18px;width:100%;height:100%}
+.ai-edit-page .comparison-panel.hidden,.ai-edit-page .advanced-controls.hidden,.ai-edit-page .edit-status.hidden{display:none}
+.ai-edit-page .comparison-card{position:relative;min-height:300px;border-radius:24px;padding:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16)}
+.ai-edit-page .comparison-card span{display:block;font-weight:700;margin:4px 6px 12px}
+.ai-edit-page .comparison-card img{width:100%;height:calc(100% - 38px);object-fit:contain;border-radius:18px}
+.ai-edit-page .edit-control-row{display:flex;align-items:center;gap:12px;width:100%}
+.ai-edit-page .operation-select-wrap{height:68px;min-width:190px;display:flex;align-items:center;gap:10px;padding:0 16px;border-radius:34px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(25px)}
+.ai-edit-page .operation-select-wrap select{border:0;outline:0;background:transparent;color:inherit;font:inherit;font-weight:700;cursor:pointer;min-width:135px}
+.ai-edit-page .operation-select-wrap select option{color:#111}
+.ai-edit-page .edit-bottom-bar textarea{min-width:0}
+.ai-edit-page .advanced-controls{display:flex;justify-content:space-between;gap:16px;margin-top:10px;padding:0 8px;font-size:12px;opacity:.7}
+.ai-edit-page .edit-status{margin-top:10px;padding:10px 14px;border-radius:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14)}
+.ai-edit-page .status-spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:currentColor;border-radius:50%;animation:lookoutSpin .8s linear infinite;margin-right:7px;vertical-align:-2px}
+.ai-edit-page .result-wrapper{display:flex;align-items:center;justify-content:center;position:relative;width:100%;height:100%}
+.ai-edit-page .result-wrapper .edited-result{max-height:100%;max-width:100%;object-fit:contain}
+.ai-edit-page .result-reset-btn{position:absolute;top:16px;right:16px;width:44px;height:44px;border:1px solid rgba(255,255,255,.25);border-radius:50%;background:rgba(0,0,0,.35);color:white;cursor:pointer}
+@keyframes lookoutSpin{to{transform:rotate(360deg)}}
+@media(max-width:800px){.ai-edit-page .ai-edit-header{flex-direction:column}.ai-edit-page .comparison-panel{grid-template-columns:1fr}.ai-edit-page .edit-control-row{flex-wrap:wrap}.ai-edit-page .operation-select-wrap{min-width:150px}.ai-edit-page .edit-bottom-bar textarea{width:100%}}

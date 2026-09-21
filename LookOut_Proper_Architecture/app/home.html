@@ -12,7 +12,8 @@
   <link rel="stylesheet" href="css/desktop/ai-edit.css">
   <link rel="stylesheet" href="css/desktop/virtual-mouse.css">
   <link rel="stylesheet" href="css/desktop/manual-editor.css">
-  <link rel="stylesheet" href="css/desktop/account.css">
+  <link rel="stylesheet" href="css/desktop/voice-input.css">
+  <link rel="stylesheet" href="css/desktop/rag-assistant.css">
   <link rel="stylesheet" href="css/mobile/mobile.css">
 
   <!-- FONT AWESOME -->
@@ -80,9 +81,9 @@
 
     <!-- PROFILE -->
 
-    <div class="profile" onclick="openProfile()" role="button" tabindex="0" title="Profile">
+    <div class="profile">
 
-      <div class="profile-icon" id="sidebarProfileIcon">
+      <div class="profile-icon">
 
         <i class="fa-solid fa-user"></i>
 
@@ -226,57 +227,6 @@ id="workspaceIcon"
 
 </div>
 
-<!-- ================= PROFILE MODAL ================= -->
-<div class="profile-modal" id="profileModal" aria-hidden="true">
-  <div class="profile-modal-backdrop" onclick="closeProfile()"></div>
-
-  <section class="profile-modal-card" role="dialog" aria-modal="true" aria-labelledby="profileModalTitle">
-    <button class="profile-close-btn" type="button" onclick="closeProfile()" aria-label="Close profile">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
-
-    <div class="profile-modal-header">
-      <div class="profile-modal-photo-wrap">
-        <img id="profilePhoto" class="profile-modal-photo" alt="Profile photo">
-        <div id="profilePhotoFallback" class="profile-photo-fallback">
-          <i class="fa-solid fa-user"></i>
-        </div>
-      </div>
-      <div>
-        <p class="profile-eyebrow">ACCOUNT</p>
-        <h2 id="profileModalTitle">Your Profile</h2>
-        <p id="profileEmail" class="profile-email">Not available</p>
-      </div>
-    </div>
-
-    <div class="profile-details-grid">
-      <div class="profile-detail"><span>First Name</span><strong id="profileFirstName">Not provided</strong></div>
-      <div class="profile-detail"><span>Last Name</span><strong id="profileLastName">Not provided</strong></div>
-      <div class="profile-detail"><span>Phone</span><strong id="profilePhone">Not provided</strong></div>
-      <div class="profile-detail"><span>Date of Birth</span><strong id="profileDateOfBirth">Not provided</strong></div>
-      <div class="profile-detail"><span>Country</span><strong id="profileCountry">Not provided</strong></div>
-      <div class="profile-detail"><span>State</span><strong id="profileState">Not provided</strong></div>
-      <div class="profile-detail"><span>City</span><strong id="profileCity">Not provided</strong></div>
-      <div class="profile-detail"><span>Theme</span><strong id="profileTheme">Not selected</strong></div>
-    </div>
-
-    <div class="profile-preferences">
-      <div class="profile-section-heading">
-        <i class="fa-solid fa-sliders"></i>
-        <span>Preferences</span>
-      </div>
-      <div class="profile-preference-row">
-        <span>Purpose</span>
-        <strong id="profilePurpose">Not selected</strong>
-      </div>
-      <div class="profile-preference-row">
-        <span>Editing Style</span>
-        <strong id="profileEditingStyle">Not selected</strong>
-      </div>
-    </div>
-  </section>
-</div>
-
 <!-- ================= JAVASCRIPT ================= -->
 
 <!-- ================= LOOKOUT JAVASCRIPT ================= -->
@@ -289,6 +239,8 @@ id="workspaceIcon"
 <script src="js/core/theme.js"></script>
 <script src="js/core/navigation.js"></script>
 <script src="js/core/account.js"></script>
+<script src="js/core/voice-input.js"></script>
+<script src="js/core/rag-agent.js"></script>
 
 <script src="js/features/ai-edit.js"></script>
 <script src="js/features/ai-generator.js"></script>
