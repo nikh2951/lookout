@@ -1,0 +1,134 @@
+/* =========================================================
+   LOOKOUT MANUAL EDIT - MOBILE CSS
+   Merge with the existing mobile.css.
+   ========================================================= */
+
+@media (max-width: 1100px) {
+    .lookout-editor {
+        grid-template-columns: 64px minmax(0, 1fr);
+    }
+
+    .lookout-properties-panel {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: min(340px, 88vw);
+        z-index: 5000;
+        transform: translateX(100%);
+        transition: transform .22s ease;
+        box-shadow: -18px 0 45px rgba(0,0,0,.35);
+    }
+
+    .lookout-properties-panel.open {
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .lookout-editor {
+        display: flex;
+        flex-direction: column;
+        min-height: 100dvh;
+    }
+
+    .lookout-editor-toolbar {
+        order: 2;
+        flex-direction: row;
+        justify-content: flex-start;
+        width: 100%;
+        min-height: 58px;
+        padding: 5px 8px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        border-right: 0;
+        border-top: 1px solid rgba(255,255,255,.08);
+    }
+
+    .lookout-tool-button {
+        flex: 0 0 44px;
+        width: 44px;
+        height: 44px;
+    }
+
+    .lookout-editor-center {
+        order: 1;
+        flex: 1;
+        min-height: 0;
+    }
+
+    .lookout-editor-topbar {
+        min-height: 50px;
+        padding: 6px 9px;
+    }
+
+    .lookout-editor-actions {
+        gap: 5px;
+    }
+
+    .lookout-editor-button {
+        padding: 7px 9px;
+        font-size: 12px;
+    }
+
+    .lookout-editor-canvas-area {
+        padding: 12px;
+    }
+
+    .lookout-properties-panel {
+        width: min(92vw, 360px);
+    }
+
+    .lookout-effect-list,
+    .lookout-filter-list,
+    .lookout-font-list,
+    .lookout-brush-list {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .lookout-modal {
+        padding: 10px;
+    }
+
+    .lookout-modal-content {
+        max-height: 94dvh;
+        border-radius: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .lookout-editor-topbar {
+        overflow-x: auto;
+        justify-content: flex-start;
+    }
+
+    .lookout-editor-actions {
+        flex-shrink: 0;
+    }
+
+    .lookout-editor-button {
+        white-space: nowrap;
+    }
+
+    .lookout-editor-canvas-area {
+        padding: 8px;
+    }
+
+    .lookout-effect-list,
+    .lookout-filter-list,
+    .lookout-font-list,
+    .lookout-brush-list {
+        grid-template-columns: 1fr;
+    }
+
+    .lookout-properties-panel {
+        width: 100%;
+    }
+
+    .lookout-toast {
+        left: 12px;
+        right: 12px;
+        bottom: 70px;
+        max-width: none;
+    }
+}

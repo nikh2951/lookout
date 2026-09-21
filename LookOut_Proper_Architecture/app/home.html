@@ -81,15 +81,18 @@
 
     <!-- PROFILE -->
 
-    <div class="profile">
-
-      <div class="profile-icon">
-
+   <div class="profile">
+    <div
+        class="profile-icon"
+        id="sidebarProfileIcon"
+        onclick="openProfile()"
+        role="button"
+        tabindex="0"
+        aria-label="Open profile"
+    >
         <i class="fa-solid fa-user"></i>
-
-      </div>
-
     </div>
+</div>
 
     <!-- MENU -->
 
@@ -224,6 +227,199 @@ id="workspaceIcon"
     </div>
 
   </div>
+
+</div>
+
+</div>  <!-- closes .main -->
+
+</div>  <!-- closes .container -->
+
+</div>  <!-- closes .container -->
+
+
+<!-- ================= PROFILE MODAL ================= -->
+
+<div
+    class="profile-modal"
+    id="profileModal"
+    aria-hidden="true"
+>
+
+    <div
+        class="profile-modal-backdrop"
+        onclick="closeProfile()"
+    ></div>
+
+    <div class="profile-modal-card">
+
+        <div class="profile-modal-glow"></div>
+
+        <!-- CLOSE -->
+        <button
+            class="profile-modal-close"
+            type="button"
+            onclick="closeProfile()"
+            aria-label="Close profile"
+        >
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <!-- HEADER -->
+        <div class="profile-header">
+
+            <div class="profile-avatar">
+                <div
+                    class="profile-photo-fallback"
+                    id="profilePhotoFallback"
+                >
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <img
+                    id="profilePhoto"
+                    src=""
+                    alt="Profile photo"
+                    style="display:none;"
+                >
+            </div>
+
+            <div class="profile-header-text">
+
+                <h2 id="profileName">
+                    User
+                </h2>
+
+                <p id="profileEmail">
+                    user@example.com
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="profile-divider"></div>
+
+        <!-- CONTENT -->
+        <div class="profile-content">
+
+            <!-- ACCOUNT -->
+            <div class="profile-section">
+
+                <div class="profile-section-title">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Account</span>
+                </div>
+
+                <div class="profile-info-grid">
+
+                    <div class="profile-info-item">
+                        <span class="profile-label">
+                            Name
+                        </span>
+
+                        <span
+                            class="profile-value"
+                            id="profileDisplayName"
+                        >
+                            —
+                        </span>
+                    </div>
+
+                    <div class="profile-info-item">
+                        <span class="profile-label">
+                            Email
+                        </span>
+
+                        <span
+                            class="profile-value"
+                            id="profileDisplayEmail"
+                        >
+                            —
+                        </span>
+                    </div>
+
+                    <div class="profile-info-item profile-info-wide">
+                        <span class="profile-label">
+                            User ID
+                        </span>
+
+                        <span
+                            class="profile-value"
+                            id="profileUserId"
+                        >
+                            —
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOOKOUT -->
+            <div class="profile-section">
+
+                <div class="profile-section-title">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>LookOut</span>
+                </div>
+
+                <div class="profile-info-grid">
+
+                    <div class="profile-info-item">
+
+                        <span class="profile-label">
+                            Account Type
+                        </span>
+
+                        <span
+                            class="profile-value"
+                            id="profileAccountType"
+                        >
+                            Free
+                        </span>
+
+                    </div>
+
+                    <div class="profile-info-item">
+
+                        <span class="profile-label">
+                            Member Since
+                        </span>
+
+                        <span
+                            class="profile-value"
+                            id="profileMemberSince"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <div class="profile-footer">
+
+            <span>
+                <i class="fa-solid fa-shield-halved"></i>
+                Your account information
+            </span>
+
+            <button
+                type="button"
+                onclick="closeProfile()"
+            >
+                Close
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
