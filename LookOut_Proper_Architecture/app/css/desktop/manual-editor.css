@@ -1,0 +1,987 @@
+/* ================= PROFESSIONAL EDITOR ================= */
+
+.pro-editor-page{
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:20px;
+
+    padding:20px;
+
+    box-sizing:border-box;
+}
+
+.glass-panel{
+
+    background:
+    rgba(255,255,255,0.08);
+
+    backdrop-filter:
+    blur(20px);
+
+    border:
+    1px solid
+    rgba(255,255,255,0.12);
+
+    border-radius:30px;
+
+    box-shadow:
+    0 10px 40px
+    rgba(0,0,0,0.2);
+}
+
+/* ================= CANVAS ================= */
+
+.pro-canvas-container{
+
+    width:95%;
+
+    height:75%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+#editorCanvas{
+
+    border-radius:24px;
+}
+
+/* ================= UPLOAD ================= */
+
+.floating-upload-btn{
+
+    position:absolute;
+
+    top:20px;
+
+    left:20px;
+
+    width:65px;
+
+    height:65px;
+
+    border:none;
+
+    border-radius:22px;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(20px);
+
+    cursor:pointer;
+
+    font-size:22px;
+}
+
+.floating-download-btn{
+    position:absolute;
+    top:92px;
+    left:20px;
+    width:65px;
+    height:65px;
+    border:none;
+    border-radius:22px;
+    background:rgba(17,24,39,0.9);
+    color:#fff;
+    backdrop-filter:blur(20px);
+    cursor:pointer;
+    font-size:22px;
+    z-index:20;
+    box-shadow:0 10px 25px rgba(0,0,0,0.22);
+}
+
+.floating-download-btn i{
+    color:#fff;
+}
+
+/* ================= TOOLBAR ================= */
+
+.main-toolbar{
+
+    width:90%;
+
+    min-height:90px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:25px;
+
+    padding:18px;
+}
+
+/* ================= TOOL ICON ================= */
+
+.tool-icon{
+
+    width:65px;
+
+    height:65px;
+
+    border-radius:22px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    position:relative;
+}
+
+.tool-icon i{
+
+    font-size:24px;
+}
+
+.tool-icon:hover{
+
+    transform:translateY(-4px);
+}
+
+/* ================= ACTIVE ================= */
+
+.active-tool{
+
+    background:
+    rgba(255,255,255,0.12);
+
+    border:
+    1px solid
+    rgba(255,255,255,0.2);
+}
+
+/* ================= SECONDARY ================= */
+
+.secondary-toolbar{
+
+    width:92%;
+
+    min-height:100px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:20px;
+
+    padding:18px;
+
+    overflow-x:auto;
+}
+
+/* ================= SUB TOOL ================= */
+
+.sub-tool{
+
+    min-width:170px;
+
+    height:70px;
+
+    border-radius:22px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:15px;
+
+    background:
+    rgba(255,255,255,0.05);
+
+    border:
+    1px solid
+    rgba(255,255,255,0.12);
+
+    padding:12px;
+}
+
+/* ================= INPUT ================= */
+
+.sub-tool input[type="range"]{
+
+    width:100px;
+}
+
+/* ================= TEXT TOOL ================= */
+
+.text-tool,
+.crop-btn{
+
+    min-width:70px;
+
+    height:70px;
+
+    border-radius:22px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:
+    rgba(255,255,255,0.05);
+
+    border:
+    1px solid
+    rgba(255,255,255,0.12);
+
+    cursor:pointer;
+}
+
+/* ================= THEME ================= */
+
+body.dark-mode
+.tool-icon i,
+
+body.dark-mode
+.sub-tool i,
+
+body.dark-mode
+.text-tool i{
+
+    color:white;
+}
+
+body:not(.dark-mode)
+.tool-icon i,
+
+body:not(.dark-mode)
+.sub-tool i,
+
+body:not(.dark-mode)
+.text-tool i{
+
+    color:black;
+}
+
+/* ================= SLIDERS ================= */
+
+body.dark-mode
+input[type="range"]{
+
+    accent-color:white;
+}
+
+body:not(.dark-mode)
+input[type="range"]{
+
+    accent-color:black;
+}
+
+/* ================= SELECT ================= */
+
+select{
+
+    padding:12px 18px;
+
+    border-radius:16px;
+
+    border:none;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    color:inherit;
+}
+
+/* ================= GLASS EDIT BUTTON ================= */
+
+.global-edit-area{
+
+    position:absolute;
+
+    bottom:30px;
+
+    left:380px;
+
+    z-index:100;
+}
+
+.main-edit-btn{
+
+    width:72px;
+
+    height:72px;
+
+    border:none;
+
+    border-radius:24px;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    backdrop-filter:
+    blur(20px);
+
+    -webkit-backdrop-filter:
+    blur(20px);
+
+    border:
+    1px solid
+    rgba(255,255,255,0.12);
+
+    box-shadow:
+    0 10px 30px
+    rgba(0,0,0,0.15);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:0.3s ease;
+}
+
+/* ================= HOVER ================= */
+
+.main-edit-btn:hover{
+
+    transform:
+    translateY(-4px)
+    scale(1.05);
+
+    background:
+    rgba(255,255,255,0.12);
+}
+
+/* ================= ICON ================= */
+
+.main-edit-btn i{
+
+    font-size:24px;
+}
+
+/* ================= DARK MODE ================= */
+
+body.dark-mode
+.main-edit-btn i{
+
+    color:white;
+}
+
+/* ================= LIGHT MODE ================= */
+
+body:not(.dark-mode)
+.main-edit-btn i{
+
+    color:black;
+}
+
+/* ===================================================== */
+/* ================= EDIT BUTTON AREA ================== */
+/* ===================================================== */
+
+.global-edit-area{
+
+  position:absolute;
+
+  bottom:38px;
+
+  left:50%;
+
+  transform:translateX(-640px);
+
+  z-index:100;
+}
+
+/* ===================================================== */
+/* ================= MAIN EDIT BUTTON ================== */
+/* ===================================================== */
+
+.main-edit-btn{
+
+  width:72px;
+  height:72px;
+
+  border:none;
+  outline:none;
+
+  border-radius:24px;
+
+  cursor:pointer;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  position:relative;
+
+  overflow:hidden;
+
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,0.45),
+    rgba(255,255,255,0.08)
+  );
+
+  backdrop-filter:
+  blur(30px)
+  saturate(180%);
+
+  -webkit-backdrop-filter:
+  blur(30px)
+  saturate(180%);
+
+  border:
+  1px solid rgba(255,255,255,0.55);
+
+  box-shadow:
+  inset 0 2px 6px rgba(255,255,255,0.9),
+  inset 0 -2px 6px rgba(255,255,255,0.12),
+  0 12px 28px rgba(0,0,0,0.08);
+
+  transition:
+  all 0.35s cubic-bezier(0.22,1,0.36,1);
+}
+
+/* ===================================================== */
+/* ================= ICON ============================== */
+/* ===================================================== */
+
+.main-edit-btn i{
+
+  font-size:24px;
+
+  color:#000;
+
+  position:relative;
+
+  z-index:2;
+
+  transition:0.35s ease;
+}
+
+/* ===================================================== */
+/* ================= HOVER ============================= */
+/* ===================================================== */
+
+.main-edit-btn:hover{
+
+  transform:
+  translateY(-4px)
+  scale(1.08);
+
+  box-shadow:
+  0 18px 34px rgba(0,0,0,0.12);
+}
+
+/* ===================================================== */
+/* ================= SHINE EFFECT ====================== */
+/* ===================================================== */
+
+.main-edit-btn::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:-160%;
+  left:-40%;
+
+  width:70%;
+  height:320%;
+
+  background:
+  linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.95),
+    transparent
+  );
+
+  transform:rotate(24deg);
+
+  animation:editGlassShine 5s linear infinite;
+}
+
+@keyframes editGlassShine{
+
+  0%{
+
+    left:-60%;
+  }
+
+  100%{
+
+    left:160%;
+  }
+}
+
+/* ===================================================== */
+/* ================= EDIT CHOICE AREA ================== */
+/* ===================================================== */
+
+.edit-choice-area{
+
+  position:absolute;
+
+  bottom:125px;
+
+  left:50%;
+
+  transform:translateX(-640px);
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:14px;
+
+  z-index:120;
+}
+
+/* ===================================================== */
+/* ================= OPTION BUTTONS ==================== */
+/* ===================================================== */
+
+.edit-choice-area button{
+
+  min-width:180px;
+
+  padding:16px 24px;
+
+  border:none;
+  outline:none;
+
+  border-radius:24px;
+
+  cursor:pointer;
+
+  font-size:16px;
+
+  font-weight:600;
+
+  letter-spacing:0.3px;
+
+  color:#000;
+
+  position:relative;
+
+  overflow:hidden;
+
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,0.45),
+    rgba(255,255,255,0.08)
+  );
+
+  backdrop-filter:
+  blur(30px)
+  saturate(180%);
+
+  -webkit-backdrop-filter:
+  blur(30px)
+  saturate(180%);
+
+  border:
+  1px solid rgba(255,255,255,0.55);
+
+  box-shadow:
+  inset 0 2px 6px rgba(255,255,255,0.9),
+  inset 0 -2px 6px rgba(255,255,255,0.12),
+  0 12px 28px rgba(0,0,0,0.08);
+
+  transition:
+  all 0.35s cubic-bezier(0.22,1,0.36,1);
+}
+
+/* ===================================================== */
+/* ================= BUTTON HOVER ====================== */
+/* ===================================================== */
+
+.edit-choice-area button:hover{
+
+  transform:
+  translateY(-4px)
+  scale(1.05);
+
+  box-shadow:
+  0 18px 36px rgba(0,0,0,0.12);
+}
+
+/* ===================================================== */
+/* ================= SHINE ============================= */
+/* ===================================================== */
+
+.edit-choice-area button::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:-160%;
+  left:-40%;
+
+  width:70%;
+  height:320%;
+
+  background:
+  linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.95),
+    transparent
+  );
+
+  transform:rotate(24deg);
+
+  animation:editGlassShine 5s linear infinite;
+}
+
+/* ===================================================== */
+/* ================= DARK MODE ========================= */
+/* ===================================================== */
+
+body.dark-mode .main-edit-btn{
+
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,0.12),
+    rgba(255,255,255,0.03)
+  );
+
+  border:
+  1px solid rgba(255,255,255,0.12);
+
+  box-shadow:
+  inset 0 2px 6px rgba(255,255,255,0.08),
+  0 12px 28px rgba(0,0,0,0.32);
+}
+
+body.dark-mode .main-edit-btn i{
+
+  color:white;
+}
+
+body.dark-mode .edit-choice-area button{
+
+  color:white;
+
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,0.12),
+    rgba(255,255,255,0.03)
+  );
+
+  border:
+  1px solid rgba(255,255,255,0.12);
+
+  box-shadow:
+  inset 0 2px 6px rgba(255,255,255,0.08),
+  0 12px 28px rgba(0,0,0,0.32);
+}
+
+ /* ================= FINAL CARD ================= */
+
+  #finalCard{
+
+    font-size:58px;
+  }
+
+.generator-preview{
+
+    min-height:600px;
+
+    position:relative;
+
+    overflow-y:auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-start;
+
+    align-items:center;
+
+    gap:24px;
+
+    padding:28px;
+}
+
+.generated-card{
+
+    width:100%;
+
+    min-height:560px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    position:relative;
+
+    flex:0 0 auto;
+}
+
+.generated-image{
+
+    width:auto;
+
+    height:auto;
+
+    max-width:95%;
+
+    max-height:95%;
+
+    object-fit:contain;
+
+    border-radius:24px;
+
+    display:block;
+}
+
+.generator-loading{
+    width:100%;
+    min-height:120px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex:0 0 auto;
+}
+
+.download-image-btn{
+    position:absolute;
+    top:16px;
+    left:16px;
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(17,24,39,0.88);
+    color:#fff;
+    z-index:6;
+    box-shadow:0 8px 20px rgba(0,0,0,0.18);
+}
+
+.download-image-btn i{
+    font-size:15px;
+    color:#fff;
+}
+
+/* ===================================================== */
+/* ================= SMOOTH TRANSITION ================= */
+/* ===================================================== */
+
+.sidebar{
+
+    transition:
+    all 0.5s cubic-bezier(0.22,1,0.36,1);
+}
+
+.main{
+
+    transition:
+    all 0.5s cubic-bezier(0.22,1,0.36,1);
+}
+
+/* ===================================================== */
+/* ================= HIDDEN SIDEBAR ==================== */
+/* ===================================================== */
+
+.sidebar.hidden{
+
+    transform:
+    translateX(-140%);
+
+    opacity:0;
+
+    pointer-events:none;
+}
+/* ===================================================== */
+/* ============ MANUAL EDITOR UPGRADE UI =============== */
+/* ===================================================== */
+
+.editor-panel{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    overflow-x:auto;
+    padding:4px;
+}
+
+.wide-panel{
+    justify-content:flex-start;
+}
+
+.compact-panel{
+    justify-content:center;
+    flex-wrap:nowrap;
+}
+
+.panel-section-title{
+    min-width:max-content;
+    height:42px;
+    padding:0 16px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:13px;
+    font-weight:700;
+    color:#111;
+    background:rgba(255,255,255,0.72);
+}
+
+body.dark-mode .panel-section-title{
+    color:#fff;
+    background:rgba(255,255,255,0.1);
+}
+
+.control-pill{
+    min-width:210px;
+    height:58px;
+    padding:10px 12px;
+    border-radius:18px;
+    display:grid;
+    grid-template-columns:auto 78px 1fr;
+    align-items:center;
+    gap:10px;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.12);
+}
+
+.control-pill span{
+    font-size:13px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.control-pill input[type="range"]{
+    width:100%;
+}
+
+.color-control{
+    min-width:260px;
+    grid-template-columns:auto 78px 42px 1fr;
+}
+
+.color-control input[type="color"],
+.color-square input[type="color"]{
+    width:34px;
+    height:34px;
+    padding:0;
+    border:none;
+    border-radius:10px;
+    overflow:hidden;
+    background:transparent;
+}
+
+.small-control{
+    min-width:170px;
+    grid-template-columns:54px 1fr;
+}
+
+.editor-action-btn,
+.editor-select{
+    min-width:max-content;
+    height:52px;
+    padding:0 18px;
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,0.15);
+    background:rgba(255,255,255,0.1);
+    color:inherit;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    cursor:pointer;
+}
+
+.editor-select{
+    display:block;
+    color:#111;
+    background:rgba(255,255,255,0.84);
+}
+
+body.dark-mode .editor-select{
+    color:#fff;
+    background:rgba(255,255,255,0.1);
+}
+
+.danger-soft{
+    color:#ff6b6b !important;
+}
+
+.tool-icon span{
+    position:absolute;
+    bottom:8px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:10px;
+    font-weight:700;
+    opacity:0.72;
+    pointer-events:none;
+}
+
+.main-toolbar .tool-icon{
+    padding-bottom:14px;
+}
+
+/* ===================================================== */
+/* ============ FULL MANUAL EDIT CANVAS ================ */
+/* ===================================================== */
+
+.pro-canvas-container .canvas-container,
+.pro-canvas-container canvas,
+.pro-canvas-container .lower-canvas,
+.pro-canvas-container .upper-canvas{
+    width:100% !important;
+    height:100% !important;
+    max-width:100% !important;
+    max-height:100% !important;
+}
+
+.pro-canvas-container{
+    align-items:stretch !important;
+}
+
+#editorCanvas{
+    display:block !important;
+}

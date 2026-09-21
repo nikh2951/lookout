@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Dashboard</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/desktop/home.css">
+  <link rel="stylesheet" href="css/desktop/workspace.css">
+  <link rel="stylesheet" href="css/desktop/ai-generator.css">
+  <link rel="stylesheet" href="css/desktop/ai-edit.css">
+  <link rel="stylesheet" href="css/desktop/virtual-mouse.css">
+  <link rel="stylesheet" href="css/desktop/manual-editor.css">
+  <link rel="stylesheet" href="css/desktop/account.css">
+  <link rel="stylesheet" href="css/mobile/mobile.css">
+
+  <!-- FONT AWESOME -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
+  <!-- ADD THIS INSIDE <head> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+
+</head>
+
+<body>
+
+  <!-- ===================================================== -->
+<!-- ================= VIRTUAL CURSOR ==================== -->
+<!-- ===================================================== -->
+
+<div id="virtualCursor"></div>
+
+<!-- ================= LIVE AMBIENT BACKGROUND ================= -->
+
+<div class="ambient-bg">
+
+  <div class="light light1"></div>
+  <div class="light light2"></div>
+  <div class="light light3"></div>
+
+</div>
+
+<!-- ================= TOP TOGGLE ================= -->
+
+<div class="top-toggle">
+
+  <label class="switch">
+
+    <input type="checkbox">
+
+    <span class="slider"></span>
+
+  </label>
+
+</div>
+
+<!-- ================= THEME BUTTON ================= -->
+
+<div class="theme-toggle" id="themeToggle">
+
+  <i class="fa-solid fa-moon moon"></i>
+
+  <i class="fa-solid fa-sun sun"></i>
+
+</div>
+
+<!-- ================= MAIN CONTAINER ================= -->
+
+<div class="container">
+
+  <!-- ================= SIDEBAR ================= -->
+
+  <div class="sidebar">
+    <div class="sidebar-overlay"></div>
+
+    <!-- PROFILE -->
+
+    <div class="profile" onclick="openProfile()" role="button" tabindex="0" title="Profile">
+
+      <div class="profile-icon" id="sidebarProfileIcon">
+
+        <i class="fa-solid fa-user"></i>
+
+      </div>
+
+    </div>
+
+    <!-- MENU -->
+
+    <div class="menu">
+      <div class="active-indicator" id="activeIndicator"></div>
+
+      <!-- HOME -->
+<div
+class="menu-item"
+onclick="goHome()"
+id="homeIcon"
+>
+
+  <i class="fa-solid fa-house"></i>
+
+</div>
+
+      <!-- WORKSPACE -->
+
+     <div
+class="menu-item workspace-icon"
+id="workspaceIcon"
+>
+
+        <i class="fa-solid fa-layer-group"></i>
+
+      </div>
+
+      <!-- SAVED -->
+
+      <div class="menu-item">
+
+        <i class="fa-solid fa-bookmark"></i>
+
+      </div>
+
+    </div>
+
+    <!-- BOTTOM ICONS -->
+
+    <div class="bottom-icons">
+
+      <!-- SETTINGS -->
+
+      <div class="settings">
+
+        <i class="fa-solid fa-gear"></i>
+
+      </div>
+
+      <!-- LOGOUT -->
+
+      <div
+      class="logout"
+      onclick="logout()"
+      >
+
+        <i class="fa-solid fa-right-from-bracket"></i>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= MAIN CONTENT ================= -->
+
+  <div class="main mobile-main" id="mainContent">
+
+  <button class="mobile-menu-btn">
+  <i class="fa-solid fa-bars"></i>
+  </button>
+
+  <h1>LOOKOUT</h1>
+
+    <p class="subtitle">
+      What would you like to create today?
+    </p>
+
+    <!-- ================= CARDS ================= -->
+
+   <div class="cards mobile-cards">
+
+      <!-- AI GENERATOR -->
+
+            <div class="card">
+
+        <h2>AI Generator</h2>
+
+        <p>
+          Create stunning visuals and generate images using AI.
+        </p>
+
+        <button onclick="openGenerator()">
+          Get Started
+        </button>
+
+      </div>
+
+      <!-- MANUAL EDIT -->
+
+      <div class="card">
+
+        <h2>Manual Edit</h2>
+
+        <p>
+          Edit images manually using advanced editing tools.
+        </p>
+
+        <button onclick="openManualEdit()">
+          Start Editing
+        </button>
+
+      </div>
+
+      <!-- AI EDIT -->
+
+           <div class="card">
+
+        <h2>AI Edit</h2>
+
+        <p>
+          Enhance and transform images intelligently using AI.
+        </p>
+
+        <button onclick="openAIEdit()">
+          Try AI Edit
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ================= PROFILE MODAL ================= -->
+<div class="profile-modal" id="profileModal" aria-hidden="true">
+  <div class="profile-modal-backdrop" onclick="closeProfile()"></div>
+
+  <section class="profile-modal-card" role="dialog" aria-modal="true" aria-labelledby="profileModalTitle">
+    <button class="profile-close-btn" type="button" onclick="closeProfile()" aria-label="Close profile">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <div class="profile-modal-header">
+      <div class="profile-modal-photo-wrap">
+        <img id="profilePhoto" class="profile-modal-photo" alt="Profile photo">
+        <div id="profilePhotoFallback" class="profile-photo-fallback">
+          <i class="fa-solid fa-user"></i>
+        </div>
+      </div>
+      <div>
+        <p class="profile-eyebrow">ACCOUNT</p>
+        <h2 id="profileModalTitle">Your Profile</h2>
+        <p id="profileEmail" class="profile-email">Not available</p>
+      </div>
+    </div>
+
+    <div class="profile-details-grid">
+      <div class="profile-detail"><span>First Name</span><strong id="profileFirstName">Not provided</strong></div>
+      <div class="profile-detail"><span>Last Name</span><strong id="profileLastName">Not provided</strong></div>
+      <div class="profile-detail"><span>Phone</span><strong id="profilePhone">Not provided</strong></div>
+      <div class="profile-detail"><span>Date of Birth</span><strong id="profileDateOfBirth">Not provided</strong></div>
+      <div class="profile-detail"><span>Country</span><strong id="profileCountry">Not provided</strong></div>
+      <div class="profile-detail"><span>State</span><strong id="profileState">Not provided</strong></div>
+      <div class="profile-detail"><span>City</span><strong id="profileCity">Not provided</strong></div>
+      <div class="profile-detail"><span>Theme</span><strong id="profileTheme">Not selected</strong></div>
+    </div>
+
+    <div class="profile-preferences">
+      <div class="profile-section-heading">
+        <i class="fa-solid fa-sliders"></i>
+        <span>Preferences</span>
+      </div>
+      <div class="profile-preference-row">
+        <span>Purpose</span>
+        <strong id="profilePurpose">Not selected</strong>
+      </div>
+      <div class="profile-preference-row">
+        <span>Editing Style</span>
+        <strong id="profileEditingStyle">Not selected</strong>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<!-- ================= LOOKOUT JAVASCRIPT ================= -->
+
+<script src="js/services/api.js"></script>
+<script src="js/services/storage.js"></script>
+<script src="js/services/downloads.js"></script>
+
+<script src="js/core/sidebar.js"></script>
+<script src="js/core/theme.js"></script>
+<script src="js/core/navigation.js"></script>
+<script src="js/core/account.js"></script>
+
+<script src="js/features/ai-edit.js"></script>
+<script src="js/features/ai-generator.js"></script>
+<script src="js/features/manual-editor.js"></script>
+
+<script src="js/virtual-mouse/gesture-controller.js"></script>
+<script type="module" src="js/virtual-mouse/gesture-web.js"></script>
+
+<script src="js/core/app.js"></script>
+
+</body>
+</html>

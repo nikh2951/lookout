@@ -1,0 +1,257 @@
+/* ================= WORKSPACE PAGE ================= */
+
+.workspace-page{
+
+  width:100%;
+
+  padding:40px;
+
+  animation:fadeUp 0.5s ease;
+}
+
+/* ================= HEADER ================= */
+
+.workspace-header{
+
+  margin-bottom:35px;
+}
+
+.workspace-header h1{
+
+  font-size:42px;
+
+  margin-bottom:10px;
+}
+
+.workspace-header p{
+
+  color:#6b7280;
+
+  font-size:16px;
+}
+
+/* ================= LAYOUT ================= */
+
+.generator-layout{
+
+  display:flex;
+
+  gap:30px;
+
+  width:100%;
+}
+
+/* ================= GLASS PANEL ================= */
+
+.glass-panel{
+
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,0.22),
+    rgba(255,255,255,0.08)
+  );
+
+  backdrop-filter:blur(35px);
+  -webkit-backdrop-filter:blur(35px);
+
+  border:1px solid rgba(255,255,255,0.4);
+
+  box-shadow:
+  inset 0 2px 6px rgba(255,255,255,0.8),
+  0 15px 40px rgba(0,0,0,0.08);
+
+  border-radius:32px;
+}
+
+/* ================= CONTROL PANEL ================= */
+
+.control-panel{
+
+  width:380px;
+
+  padding:30px;
+
+  display:flex;
+  flex-direction:column;
+
+  gap:22px;
+}
+
+/* ================= PREVIEW PANEL ================= */
+
+.preview-panel{
+
+  flex:1;
+
+  min-height:650px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:30px;
+}
+
+/* ================= TEXTAREA ================= */
+
+.control-panel textarea{
+
+  width:100%;
+  height:140px;
+
+  border:none;
+  outline:none;
+
+  resize:none;
+
+  padding:18px;
+
+  border-radius:20px;
+
+  background:
+  rgba(255,255,255,0.18);
+
+  backdrop-filter:blur(20px);
+
+  font-size:15px;
+
+  color:#111827;
+}
+
+/* ================= SELECT ================= */
+
+.control-panel select{
+
+  width:100%;
+
+  padding:15px;
+
+  border:none;
+  outline:none;
+
+  border-radius:18px;
+
+  background:
+  rgba(255,255,255,0.18);
+
+  backdrop-filter:blur(20px);
+}
+
+/* ================= RANGE ================= */
+
+.control-panel input[type="range"]{
+
+  width:100%;
+}
+
+/* ================= CONTROL GROUP ================= */
+
+.control-group{
+
+  display:flex;
+  flex-direction:column;
+
+  gap:10px;
+}
+
+/* ================= UPLOAD ZONE ================= */
+
+.upload-zone{
+
+  height:220px;
+
+  border:2px dashed rgba(255,255,255,0.45);
+
+  border-radius:28px;
+
+  display:flex;
+  flex-direction:column;
+
+  justify-content:center;
+  align-items:center;
+
+  gap:15px;
+
+  position:relative;
+
+  overflow:hidden;
+
+  background:
+  rgba(255,255,255,0.08);
+}
+
+/* ================= HIDE FILE INPUT ================= */
+
+.upload-zone input{
+
+  position:absolute;
+
+  inset:0;
+
+  opacity:0;
+
+  cursor:pointer;
+}
+
+/* ================= UPLOAD ICON ================= */
+
+.upload-zone i{
+
+  font-size:58px;
+}
+
+/* ================= BEFORE AFTER ================= */
+
+.before-after{
+
+  width:100%;
+
+  display:flex;
+
+  gap:20px;
+}
+
+/* ================= IMAGE BOX ================= */
+
+.image-box{
+
+  flex:1;
+
+  height:520px;
+
+  border-radius:28px;
+
+  background:
+  rgba(255,255,255,0.08);
+
+  border:1px solid rgba(255,255,255,0.25);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  color:#6b7280;
+}
+
+/* ================= ANIMATION ================= */
+
+@keyframes fadeUp{
+
+  from{
+
+    opacity:0;
+
+    transform:
+    translateY(25px);
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:
+    translateY(0px);
+  }
+}
+

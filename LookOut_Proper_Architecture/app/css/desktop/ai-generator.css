@@ -1,0 +1,248 @@
+/* ================= GENERATOR PAGE ================= */
+
+.generator-page{
+
+  width:100%;
+  height:100%;
+
+  display:flex;
+  flex-direction:column;
+
+  justify-content:space-between;
+
+  padding:35px;
+
+  animation:fadeUp 0.45s ease;
+}
+
+/* ================= PREVIEW AREA ================= */
+
+.generator-preview{
+
+  flex:1;
+
+  width:100%;
+
+  border-radius:38px;
+
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,0.18),
+    rgba(255,255,255,0.05)
+  );
+
+  backdrop-filter:blur(35px);
+  -webkit-backdrop-filter:blur(35px);
+
+  border:1px solid rgba(255,255,255,0.35);
+
+  box-shadow:
+  inset 0 2px 6px rgba(255,255,255,0.7),
+  0 15px 40px rgba(0,0,0,0.08);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+
+/* ================= GENERATOR BOTTOM AREA ================= */
+
+.generator-bottom-bar{
+
+  width:100%;
+
+  max-width:980px;
+
+  margin:28px auto 0 auto;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:16px;
+}
+/* ================= PROMPT BOX ================= */
+
+.generator-bottom-bar textarea{
+
+  flex:1;
+
+  height:68px;
+
+  border:none;
+  outline:none;
+
+  resize:none;
+
+  border-radius:999px;
+
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,0.18),
+    rgba(255,255,255,0.05)
+  );
+
+  backdrop-filter:blur(35px);
+  -webkit-backdrop-filter:blur(35px);
+
+  border:1px solid rgba(255,255,255,0.18);
+
+  box-shadow:
+  inset 0 2px 6px rgba(255,255,255,0.55),
+  0 10px 30px rgba(0,0,0,0.06);
+
+  font-size:18px;
+
+  color:#111827;
+
+  padding:20px 24px;
+
+  font-family:'Segoe UI',sans-serif;
+
+  overflow:hidden;
+}
+
+/* ================= GENERATE BUTTON ================= */
+
+.generate-btn{
+
+  width:68px;
+  height:68px;
+
+  min-width:68px;
+
+  border:none;
+  outline:none;
+
+  border-radius:50%;
+
+  cursor:pointer;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,0.38),
+    rgba(255,255,255,0.08)
+  );
+
+  backdrop-filter:blur(28px) saturate(180%);
+  -webkit-backdrop-filter:blur(28px) saturate(180%);
+
+  border:1px solid rgba(255,255,255,0.55);
+
+  box-shadow:
+  inset 0 2px 5px rgba(255,255,255,0.85),
+  inset 0 -2px 5px rgba(255,255,255,0.18),
+  0 10px 24px rgba(0,0,0,0.08);
+
+  transition:
+  all 0.35s cubic-bezier(0.22,1,0.36,1);
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+/* ================= GLOSS SHINE ================= */
+
+.generate-btn::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:-140%;
+  left:-50%;
+
+  width:70%;
+  height:320%;
+
+  background:
+  linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.85),
+    transparent
+  );
+
+  transform:rotate(25deg);
+
+  animation:buttonShine 5s linear infinite;
+}
+
+/* ================= ICON ================= */
+
+.generate-btn i{
+
+  position:relative;
+
+  z-index:2;
+
+  font-size:20px;
+
+  color:#000000;
+
+  transition:0.35s ease;
+}
+
+/* ================= DARK MODE ================= */
+
+body.dark-mode .generate-btn{
+
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,0.14),
+    rgba(255,255,255,0.04)
+  );
+
+  border:1px solid rgba(255,255,255,0.12);
+
+  box-shadow:
+  inset 0 2px 5px rgba(255,255,255,0.08),
+  0 10px 24px rgba(0,0,0,0.28);
+}
+
+/* ================= DARK MODE ICON ================= */
+
+body.dark-mode .generate-btn i{
+
+  color:white;
+}
+
+/* ================= HOVER ================= */
+
+.generate-btn:hover{
+
+  transform:
+  translateY(-3px)
+  scale(1.08);
+}
+
+/* ================= SHINE ANIMATION ================= */
+
+@keyframes buttonShine{
+
+  0%{
+
+    transform:
+    translateX(-160%)
+    rotate(25deg);
+  }
+
+  100%{
+
+    transform:
+    translateX(260%)
+    rotate(25deg);
+  }
+}
+
+/* ===================================================== */

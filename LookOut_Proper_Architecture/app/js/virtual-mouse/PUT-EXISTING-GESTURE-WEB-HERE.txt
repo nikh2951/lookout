@@ -1,0 +1,1 @@
+Copy your existing gesture-web.js into this same folder. Do not replace its actual MediaPipe/gesture implementation with gesture-controller.js.

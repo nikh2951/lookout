@@ -1,0 +1,202 @@
+/* ================= VIRTUAL CURSOR ==================== */
+/* ===================================================== */
+
+body.virtual-cursor-enabled{
+
+    cursor:none;
+}
+
+#virtualCursor{
+
+    width:26px;
+    height:26px;
+
+    border-radius:50%;
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    pointer-events:none;
+
+    z-index:999999;
+
+    transform:
+    translate(-50%,-50%);
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,0.42),
+        rgba(255,255,255,0.08)
+    );
+
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+
+    border:
+    1px solid rgba(255,255,255,0.55);
+
+    box-shadow:
+    inset 0 2px 5px rgba(255,255,255,0.75),
+    0 5px 18px rgba(0,0,0,0.18);
+
+    transition:
+    width 0.2s ease,
+    height 0.2s ease,
+    transform 0.06s linear;
+
+    opacity:0;
+
+    visibility:hidden;
+}
+
+/* ACTIVE */
+
+body.virtual-cursor-enabled #virtualCursor{
+
+    opacity:1;
+
+    visibility:visible;
+}
+
+/* CLICK EFFECT */
+
+#virtualCursor.active{
+
+    width:36px;
+    height:36px;
+}
+
+/* DARK MODE */
+
+body.dark-mode #virtualCursor{
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,0.16),
+        rgba(255,255,255,0.04)
+    );
+
+    border:
+    1px solid rgba(255,255,255,0.18);
+}
+
+/* ===================================================== */
+/* ================= TOGGLE ============================ */
+/* ===================================================== */
+
+.gesture-toggle-container{
+
+    position:fixed;
+
+    top:24px;
+    right:120px;
+
+    z-index:9999;
+}
+
+.gesture-switch{
+
+    position:relative;
+
+    display:inline-block;
+
+    width:64px;
+    height:34px;
+}
+
+.gesture-switch input{
+
+    opacity:0;
+
+    width:0;
+    height:0;
+}
+
+.gesture-slider{
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:50px;
+
+    cursor:pointer;
+
+    background:
+    rgba(255,255,255,0.22);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:
+    1px solid rgba(255,255,255,0.35);
+
+    box-shadow:
+    inset 0 2px 4px rgba(255,255,255,0.5),
+    0 4px 12px rgba(0,0,0,0.12);
+
+    transition:0.35s;
+}
+
+.gesture-slider::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:26px;
+    height:26px;
+
+    left:4px;
+    top:3px;
+
+    border-radius:50%;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,0.9),
+        rgba(255,255,255,0.5)
+    );
+
+    box-shadow:
+    0 4px 12px rgba(0,0,0,0.15);
+
+    transition:0.35s;
+}
+
+.gesture-switch input:checked
++ .gesture-slider{
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,0.28),
+        rgba(255,255,255,0.12)
+    );
+}
+
+.gesture-switch input:checked
++ .gesture-slider::before{
+
+    transform:
+    translateX(30px);
+}
+
+body.dark-mode,
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode p,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode span {
+
+    color: white !important;
+
+}
+
